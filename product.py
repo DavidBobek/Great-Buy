@@ -63,6 +63,7 @@ class Basket:
     
         return itemnames
     
+    
 """ produkt1 = Product("Produkt 1","b",2,"a","b","a","b","a","helloo")
 produkt2 = Product("Produkt 2","b",2,"a","b","a","b","a","helloo")
 produkt3 = Product("Produkt 3","b",4,"a","b","a","b","a","helloo")
