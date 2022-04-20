@@ -23,13 +23,14 @@ class Product:
         self.price = price
         self.id = str(uuid.uuid4())
         self.brand = brand
-        self.price = price
         self.screensize = screensize
         self.time_of_purchase = time_of_purchase
         self.processor = processor
         self.storage_type = storage_type
         self.color = color
         self.description = description
+        self.review = []
+        
         
         
 class Basket:
@@ -44,7 +45,8 @@ class Basket:
     def removeitem(self,item):
         self.items.remove(item)
         
-        
+    #COUPON?
+    
     #works
     def calculate_total_value(self):
         totalValue = 0
@@ -56,8 +58,6 @@ class Basket:
     
     def check_items(self):
         itemnames = []
-        
-        #appending some random bullshit
         for x in self.items:
             itemnames.append(x.name)
     

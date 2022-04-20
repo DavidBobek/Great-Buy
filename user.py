@@ -11,6 +11,8 @@ basket, 1 to 1 relation, USER CAN HAVE ONLY  BASKET
 
 
 
+#shipping TO COUNTRY??????
+
 import uuid
 #user seller
 #self.type_user = seller/buyer

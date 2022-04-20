@@ -126,7 +126,7 @@ def filterby_storagetype(warehouse,users_choice):
         return SSD_type
     
     
-    
+#search
     
     
     """. Filter = Is going to then display Laptops that can be filtered by = processor (Intel Core
@@ -185,5 +185,9 @@ print(basket1.check_items())
 
 
 
-
+#objects
 print(mainfilter("processor"))
+
+#set to filter for AMD Ryzen 9
+for x in mainfilter("processor"):
+    print(x.processor)
