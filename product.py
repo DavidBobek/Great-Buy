@@ -29,7 +29,7 @@ class Product:
         self.storage_type = storage_type
         self.color = color
         self.description = description
-        self.review = []
+        self.reviews = {}
         
         
         
@@ -62,6 +62,8 @@ class Basket:
             itemnames.append(x.name)
     
         return itemnames
+    
+    
     
     
 """ produkt1 = Product("Produkt 1","b",2,"a","b","a","b","a","helloo")
