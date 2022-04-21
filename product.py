@@ -17,8 +17,20 @@ description
 import uuid
 import datetime
 
+
 class Product:
-    def __init__(self,name,brand,price,screensize,time_of_purchase,processor,storage_type,color,description):
+    def __init__(
+        self,
+        name,
+        brand,
+        price,
+        screensize,
+        time_of_purchase,
+        processor,
+        storage_type,
+        color,
+        description,
+    ):
         self.name = name
         self.price = price
         self.id = str(uuid.uuid4())
@@ -30,42 +42,39 @@ class Product:
         self.color = color
         self.description = description
         self.reviews = {}
-        
-        
-        
+
+
 class Basket:
     def __init__(self):
         self.items = []
         self.user = None
-        
-    #works
-    def additem(self,item):
+
+    # works
+    def additem(self, item):
         self.items.append(item)
-        
-    def removeitem(self,item):
+
+    def removeitem(self, item):
         self.items.remove(item)
-        
-    #COUPON?
-    
-    #works
+
+    # COUPON?
+
+    # works
     def calculate_total_value(self):
         totalValue = 0
         for x in self.items:
             totalValue += x.price
-        
+
         print(totalValue)
         return totalValue
-    
+
     def check_items(self):
         itemnames = []
         for x in self.items:
             itemnames.append(x.name)
-    
+
         return itemnames
-    
-    
-    
-    
+
+
 """ produkt1 = Product("Produkt 1","b",2,"a","b","a","b","a","helloo")
 produkt2 = Product("Produkt 2","b",2,"a","b","a","b","a","helloo")
 produkt3 = Product("Produkt 3","b",4,"a","b","a","b","a","helloo")
