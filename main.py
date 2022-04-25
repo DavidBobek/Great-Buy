@@ -35,7 +35,7 @@ def validation(name, email_address, password, age):
             registration()
 
 
-registration()
+#registration()
 
 
 def filterby_proccesor(warehouse, users_choice):

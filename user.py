@@ -24,6 +24,7 @@ class User:
         self.password = password
         self.age = age
         self.basket = None
+        self.sellings = {}
         # basket is going to be an object
 
     def assignbasket(self, basket):
