@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import Error
+#from config import config
 
 # fix line 9 CONNECTION NOT DEFINED
 
@@ -22,7 +23,7 @@ try:
     create_table = """ CREATE TABLE userinfo(
         USER_ID INT PRIMARY KEY NOT NULL,
         PRODUCT_ID INT NOT NULL,
-        PRUCE INT ,
+        PRICE INT ,
         TIME DATE);"""
 
     # EXECUTING the creation of database
@@ -49,25 +50,31 @@ finally:
         cursor.close()
         connection.close()
         print("PostgreSQL connection is closed")
+        
+        
 
 
-""" import psycopg2
 
-#establishing the connection
-conn = psycopg2.connect(
-   database="postgres", user='postgres', password='password', host='127.0.0.1', port= '5432'
+###WORK ON THIS
+
+mydb = psycopg2.connect(
+  host="localhost",
+  user="postgres",
+  password="postgresdb",
+  database="postgres"
 )
-conn.autocommit = True
 
-#Creating a cursor object using the cursor() method
-cursor = conn.cursor()
+mycursor = mydb.cursor()
 
-#Preparing query to create a database
-sql = '''CREATE database mydb''';
 
-#Creating a database
-cursor.execute(sql)
-print("Database created successfully........")
 
-#Closing the connection
-conn.close() """
+def dbInsert(payload):
+    
+    sql = "INSERT INTO user_info (USER_ID,PRODUCT_ID,PRICE,TIME) VALUES (%i, %s, %s, %s)"
+    val = (payload[0], payload[1], payload[2], payload[3])
+    mycursor.execute(sql, val)
+    mydb.commit()
+    
+    
+    
+dbInsert([1,1,1])

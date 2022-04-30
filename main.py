@@ -1,5 +1,7 @@
 from concurrent.futures import process
 from time import process_time
+
+from numpy import append
 from product import Product
 from product import Basket
 from user import User
@@ -58,6 +60,7 @@ def filterby_proccesor(warehouse, users_choice):
 
         if x.processor == "AMD Ryzen 9":
             processorAMD_9.append(x)
+            print(len(processorAMD_9))
 
         if x.processor == "Intel Core i3":
             processorIntel_3.append(x)
@@ -72,25 +75,31 @@ def filterby_proccesor(warehouse, users_choice):
             processorIntel_9.append(x)
 
     if users_choice == "AMD Ryzen 5":
+        print(f"Returned all processors {processorAMD_5}")
         return processorAMD_5
 
     if users_choice == "AMD Ryzen 7":
+        print(f"Returned all processors {processorAMD_7}")
         return processorAMD_7
 
     if users_choice == "AMD Ryzen 9":
-        print("hello")
+        print(f"Returned all processors {processorAMD_9}")
         return processorAMD_9
 
     if users_choice == "Intel Core i3":
+        print(f"Returned all processors {processorIntel_3}")
         return processorIntel_3
 
     if users_choice == "Intel Core i5":
+        print(f"Returned all processors {processorIntel_5}")
         return processorIntel_5
 
     if users_choice == "Intel Core i7":
+        print(f"Returned all processors {processorIntel_7}")
         return processorIntel_7
 
     if users_choice == "Intel Core i9":
+        print(f"Returned all processors {processorIntel_9}")
         return processorIntel_9
 
 
@@ -147,10 +156,10 @@ produkt2 = Product(
     "Produkt 2", "brand", 2, "screensize", "time", "AMD Ryzen 9", "b", "a", "helloo"
 )
 produkt3 = Product(
-    "Produkt 3", "brand", 4, "screensize", "time", "intel", "b", "a", "helloo"
+    "Produkt 3", "brand", 4, "screensize", "time", "Intel Core i5", "b", "a", "helloo"
 )
 produkt4 = Product(
-    "Produkt 4", "brand ", 8, "screensize", "time", "intel", "b", "a", "helloo"
+    "Produkt 4", "brand ", 8, "screensize", "time", "Intel Core i3", "b", "a", "helloo"
 )
 
 warhouseitems.append(produkt1)
@@ -178,3 +187,78 @@ print(mainfilter("processor"))
 # set to filter for AMD Ryzen 9
 for x in mainfilter("processor"):
     print(x.processor)
+
+
+
+
+
+from Visual import *
+
+import sys
+
+
+class firstApp(Ui_MainWindow):
+    def __init__(self,window):
+        
+        self.setupUi(window)
+        #this line connect the button called filter_button with a local function ShowMe
+        self.filter_button.clicked.connect(self.getUsers_processor)
+        
+        #OPted for my own group boxes
+        
+        self.radio_procesors = []
+        self.radio_procesors.append(self.Intel_9)
+        self.radio_procesors.append(self.Intel_7)
+        self.radio_procesors.append(self.Intel_5)
+        self.radio_procesors.append(self.Intel_3)
+        
+        self.radio_procesors.append(self.AMD9)
+        self.radio_procesors.append(self.AMD7)
+        self.radio_procesors.append(self.AMD5)
+        
+        
+        
+
+    
+    def getUsers_processor(self):
+        #need to cycle through all of the groupboxes
+        
+        for x in self.radio_procesors:
+            if x.isChecked():
+                print("dsfg")
+                #works, stores a text of the processor
+                pickedprocessor = x.text()
+                
+                
+                #this function is filtering by providing the processor inside of the application
+                filterby_proccesor(warhouseitems, pickedprocessor)
+                print(f"Filtering {pickedprocessor}")
+            
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ALLOWS US TO ACTUALLY SEE THE MENU
+#very important
+
+app = QtWidgets.QApplication(sys.argv)
+MainWindow = QtWidgets.QMainWindow()
+
+#instance of the class
+
+ui = firstApp(MainWindow)
+
+MainWindow.show()
+
+app.exec()
