@@ -267,10 +267,13 @@ class registration_window(Registration_Ui):
         
         
     def collect_data(self):
-        """ entry_name = self.name_entry.text
+        
+        #figure out how to get the text
+        entry_name = self.name_entry.text
         entry_email = self.email_entry.text 
-        entry_password = self.password_entry.text """
-
+        entry_password = self.password_entry.text
+        print(entry_email)
+        
             
         #wooorks
         ui = firstApp(MainWindow)
