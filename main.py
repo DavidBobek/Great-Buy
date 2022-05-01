@@ -17,24 +17,26 @@ def registration():
     validation(name, email_address, password, age)
 
 
-def validation(name, email_address, password, age):
+def validation(name, email_address, password):
+    correctness = 1
     if not name.isalpha():
         # need some message that the process is starting once again
-        registration()
-
+        correctness = 0
     email_regex = re.compile(
         r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+"
     )
 
     if not re.fullmatch(email_regex, email_address):
-        registration()
+        correctness = 0
 
     if not re.fullmatch(r"[A-Za-z0-9@#$%^&+=]{8,}", password):
-        registration()
+        correctness = 0
 
-    for x in age:
-        if not re.fullmatch(r"[0-9]", x):
-            registration()
+    if correctness ==1:
+        return "Valid"
+    else:
+        return "Not Valid"
+    
 
 
 #registration()
@@ -255,7 +257,7 @@ ui = firstApp(MainWindow)
 
 
 from registration import *
-
+from PyQt5.QtWidgets import QMessageBox
 
 class registration_window(Registration_Ui):
     def __init__(self,window):
@@ -264,21 +266,30 @@ class registration_window(Registration_Ui):
         self.proceed_button.clicked.connect(self.collect_data)
         
         
-        
+    
+    
+
         
     def collect_data(self):
         
         #figure out how to get the text
-        entry_name = self.name_entry.text
-        entry_email = self.email_entry.text 
-        entry_password = self.password_entry.text
+        entry_name = self.name_entry.text()
+        entry_email = self.email_entry.text()
+        entry_password = self.password_entry.text()
         print(entry_email)
         
+        if validation(entry_name,entry_email,entry_password) == "Valid":
+            #wooorks
             
-        #wooorks
-        ui = firstApp(MainWindow)
-        MainWindow.show()
-
+            ui = firstApp(MainWindow)
+            MainWindow.show()
+            
+        else:
+            self.name_entry.setText("")
+            self.email_entry.setText("")
+            self.password_entry.setText("")
+            
+            
 
 reg = registration_window(MainWindow)
 MainWindow.show()
