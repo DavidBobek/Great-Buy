@@ -1,80 +1,40 @@
 import psycopg2
-from psycopg2 import Error
-#from config import config
 
-# fix line 9 CONNECTION NOT DEFINED
 
-#david
-#postgresdb
-try:
+from user import User
 
-    connection = psycopg2.connect(
-        user="postgres",
-        password="postgresdb",
-        host="127.0.0.1",
-        port="5433",
-        database="postgres",
+
+davidko = User("davidko","dbobo","1234234",123)
+
+def registering(user):
+    con = psycopg2.connect(
+    host = 'localhost',
+    database='GreatBuy',
+    user = 'postgres',
+    password = 'postgres',
+
+    
     )
+    _id = f'\'{user.id}\''
+    password = f'\'{user.name}\''
+    email = f'\'{user.email}\''
 
-    cursor = connection.cursor()
+    insert_sql_query = f'''
 
-    # SQL query to create a BRAND NEW TABLE
-
-    create_table = """ CREATE TABLE userinfo(
-        USER_ID INT PRIMARY KEY NOT NULL,
-        PRODUCT_ID INT NOT NULL,
-        PRICE INT ,
-        TIME DATE);"""
-
-    # EXECUTING the creation of database
-
-    cursor.execute(create_table)
-
-    connection.commit()
-
-    print("Table was created")
-
-except (Exception, Error) as error:
-    print("Error while connecting to PostgreSQL", error)
-    
-    try:
-        #figure out how to add just admin, data
-        pass
-    
-    except:
-        pass
-
-
-finally:
-    if connection:
-        cursor.close()
-        connection.close()
-        print("PostgreSQL connection is closed")
-        
-        
+    INSERT INTO UserData(USER_ID,PASSWORD,EMAIL)VALUES ({_id}, {password}, {email});;
 
 
 
-###WORK ON THIS
+    '''
 
-mydb = psycopg2.connect(
-  host="localhost",
-  user="postgres",
-  password="postgresdb",
-  database="postgres"
-)
+    pointer = con.cursor()
+    pointer.execute(insert_sql_query)
 
-mycursor = mydb.cursor()
-
-
-
-def dbInsert(payload):
-    
-    sql = "INSERT INTO user_info (USER_ID,PRODUCT_ID,PRICE,TIME) VALUES (%i, %s, %s, %s)"
-    val = (payload[0], payload[1], payload[2], payload[3])
-    mycursor.execute(sql, val)
-    mydb.commit()
+    con.commit()
+    con.close()
     
     
-    
-dbInsert([1,1,1])
+
+
+
+registering(davidko)

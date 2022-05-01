@@ -123,6 +123,10 @@ def filterby_storagetype(warehouse, users_choice):
 
     # search
 
+
+
+
+
     """. Filter = Is going to then display Laptops that can be filtered by = processor (Intel Core
 i9,Intel Core i7, Intel Core i5,Intel Core i3,AMD Ryzen 9,AMD Ryzen 7,AMD Ryzen
 5),Storage type(SSD\HDD), Color(Black,Silver,White,Gray),Screen Size"""
