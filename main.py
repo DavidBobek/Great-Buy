@@ -243,16 +243,6 @@ class firstApp(Ui_MainWindow):
 
 
 
-
-
-
-
-
-
-
-
-
-
 #ALLOWS US TO ACTUALLY SEE THE MENU
 #very important
 
@@ -263,6 +253,30 @@ MainWindow = QtWidgets.QMainWindow()
 
 ui = firstApp(MainWindow)
 
-MainWindow.show()
 
+from registration import *
+
+
+class registration_window(Registration_Ui):
+    def __init__(self,window):
+        self.setupUi(window)
+        #this line connect the button called filter_button with a local function ShowMe
+        self.proceed_button.clicked.connect(self.collect_data)
+        
+        
+        
+        
+    def collect_data(self):
+        """ entry_name = self.name_entry.text
+        entry_email = self.email_entry.text 
+        entry_password = self.password_entry.text """
+
+            
+        #wooorks
+        ui = firstApp(MainWindow)
+        MainWindow.show()
+
+
+reg = registration_window(MainWindow)
+MainWindow.show()
 app.exec()
