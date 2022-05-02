@@ -4,7 +4,7 @@ import psycopg2
 from user import User
 
 
-davidko = User("davidko","dbobo","1234234",123)
+
 
 def registering(user):
     con = psycopg2.connect(
@@ -16,7 +16,7 @@ def registering(user):
     
     )
     _id = f'\'{user.id}\''
-    password = f'\'{user.name}\''
+    password = f'\'{user.password}\''
     email = f'\'{user.email}\''
 
     insert_sql_query = f'''
@@ -38,6 +38,49 @@ def registering(user):
     
     
 
+def controlling(id):
+    con = psycopg2.connect(
+    host = 'localhost',
+    database='GreatBuy',
+    user = 'postgres',
+    password = 'postgres',
+    )
+    
+    insert_sql_query = f'''
+
+    SELECT * FROM UserData WHERE USER_ID = {id};
 
 
-registering(davidko)
+
+    '''
+    
+    pointer = con.cursor()
+    pointer.execute(insert_sql_query)
+    
+
+def deleting():
+    con = psycopg2.connect(
+    host = 'localhost',
+    database='GreatBuy',
+    user = 'postgres',
+    password = 'postgres',
+    )
+    
+    insert_sql_query = '''
+
+    DELETE FROM UserData ;
+
+
+
+    '''
+    
+    pointer = con.cursor()
+    pointer.execute(insert_sql_query)
+    print("done")
+    
+    con.commit()
+    con.close()
+    
+deleting()
+
+#registering(davidko)

@@ -201,6 +201,7 @@ from Visual import *
 
 import sys
 
+import database
 
 class firstApp(Ui_MainWindow):
     def __init__(self,window):
@@ -243,11 +244,14 @@ class firstApp(Ui_MainWindow):
         entry_email = self.ui.email_entry.text()
         entry_password = self.ui.password_entry.text()
         
-        #holy fuck it works
-        #seems to work now close the window
         
         if validation(entry_name,entry_email,entry_password) == "Valid":
+            newUser = User(entry_name,entry_email,entry_password,18)
+            database.registering(newUser)
+            #check if user exists, if not than write to database
             print("User logged ini")
+            #how to check if there is something in the database
+            
             self.window.hide()
             
             
@@ -261,6 +265,10 @@ class firstApp(Ui_MainWindow):
     
     
     def getUsers_processor(self):
+        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
+        
+        
+        
         #need to cycle through all of the groupboxes
         
         for x in self.radio_procesors:
