@@ -247,7 +247,8 @@ class firstApp(Ui_MainWindow):
         #seems to work now close the window
         
         if validation(entry_name,entry_email,entry_password) == "Valid":
-            print("jerro")
+            print("User logged ini")
+            self.window.hide()
             
             
         else:
