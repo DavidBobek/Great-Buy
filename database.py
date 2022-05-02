@@ -1,3 +1,5 @@
+from ast import Not
+import email
 import psycopg2
 
 
@@ -38,7 +40,7 @@ def registering(user):
     
     
 
-def controlling(id):
+def controlling(email):
     con = psycopg2.connect(
     host = 'localhost',
     database='GreatBuy',
@@ -46,9 +48,9 @@ def controlling(id):
     password = 'postgres',
     )
     
-    insert_sql_query = f'''
+    insert_sql_query = '''
 
-    SELECT * FROM UserData WHERE USER_ID = {id};
+    SELECT * FROM UserData;
 
 
 
@@ -56,6 +58,15 @@ def controlling(id):
     
     pointer = con.cursor()
     pointer.execute(insert_sql_query)
+    
+    user_data = pointer.fetchall()  # searches for user
+    for x in user_data:
+        if x[2] == email:
+            return "Found"
+    
+    else:
+        return "Not"
+        
     
 
 def deleting():
@@ -81,6 +92,7 @@ def deleting():
     con.commit()
     con.close()
     
-deleting()
+#deleting()
+controlling("s@gmail.com")
 
 #registering(davidko)

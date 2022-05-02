@@ -246,13 +246,22 @@ class firstApp(Ui_MainWindow):
         
         
         if validation(entry_name,entry_email,entry_password) == "Valid":
-            newUser = User(entry_name,entry_email,entry_password,18)
-            database.registering(newUser)
-            #check if user exists, if not than write to database
-            print("User logged ini")
+            if database.controlling(entry_email) == "Not":    
+                newUser = User(entry_name,entry_email,entry_password,18)
+                database.registering(newUser)
+                print("User registered")
+                self.window.hide()
+                
+            else:
+                self.ui.name_entry.setText("User with this email adress already exists")
+                self.ui.email_entry.setText("User with this email adress already exists")
+                self.ui.password_entry.setText("User with this email adress already exists")
+                
+                #check if user exists, if not than write to database
+            
             #how to check if there is something in the database
             
-            self.window.hide()
+            
             
             
         else:
@@ -303,20 +312,6 @@ class firstApp(Ui_MainWindow):
 from registration import *
 from PyQt5.QtWidgets import QMessageBox
 
-""" class registration_window(Registration_Ui):
-    def __init__(self,window):
-        
-        self.setupUi(window)
-        this line connect the button called filter_button with a local function ShowMe
-        self.proceed_button.clicked.connect(self.collect_data)
-        
-        
-
-    def collect_data(self):
-        
-        
-            
-             """
 
 if __name__ == "__main__":
         
