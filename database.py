@@ -27,8 +27,6 @@ def registering(user):
 
     '''
     
-
-
     pointer = con.cursor()
     pointer.execute(insert_sql_query)
     print("Data inputted")

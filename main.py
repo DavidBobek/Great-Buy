@@ -136,16 +136,15 @@ i9,Intel Core i7, Intel Core i5,Intel Core i3,AMD Ryzen 9,AMD Ryzen 7,AMD Ryzen
 
 warhouseitems = []
 
-userchoice = "AMD Ryzen 9"
 
 
-def mainfilter(option):
+""" def mainfilter(option):
     if option == "processor":
         return filterby_proccesor(warhouseitems, userchoice)
 
     if option == "storage":
         return filterby_storagetype(warhouseitems, userchoice)
-
+ """
 
 davidko = User("david", "dbobek", "5454", 69)
 basket1 = Basket()
@@ -188,11 +187,11 @@ print(basket1.check_items())
 
 
 # objects
-print(mainfilter("processor"))
+#print(mainfilter("processor"))
 
 # set to filter for AMD Ryzen 9
-for x in mainfilter("processor"):
-    print(x.processor)
+""" for x in mainfilter("processor"):
+    print(x.processor) """
 
 
 
@@ -209,7 +208,13 @@ class firstApp(Ui_MainWindow):
         self.setupUi(window)
         #this line connect the button called filter_button with a local function ShowMe
         self.filter_button.clicked.connect(self.getUsers_processor)
+        self.login_button.clicked.connect(self.openregistration)
         
+        
+    
+    
+    
+    
         #OPted for my own group boxes
         
         self.radio_procesors = []
@@ -223,8 +228,36 @@ class firstApp(Ui_MainWindow):
         self.radio_procesors.append(self.AMD5)
         
         
+    def openregistration(self):
+        print("chuj1")
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Registration_Ui()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.proceed_button.clicked.connect(self.checking)
         
-
+        
+        
+    def checking(self):
+        entry_name = self.ui.name_entry.text()
+        entry_email = self.ui.email_entry.text()
+        entry_password = self.ui.password_entry.text()
+        
+        #holy fuck it works
+        #seems to work now close the window
+        
+        if validation(entry_name,entry_email,entry_password) == "Valid":
+            print("jerro")
+            
+            
+        else:
+            self.ui.name_entry.setText("")
+            self.ui.email_entry.setText("")
+            self.ui.password_entry.setText("")
+    
+    
+        
+    
     
     def getUsers_processor(self):
         #need to cycle through all of the groupboxes
@@ -239,6 +272,9 @@ class firstApp(Ui_MainWindow):
                 #this function is filtering by providing the processor inside of the application
                 filterby_proccesor(warhouseitems, pickedprocessor)
                 print(f"Filtering {pickedprocessor}")
+                
+                
+    
             
       
     
@@ -248,49 +284,41 @@ class firstApp(Ui_MainWindow):
 #ALLOWS US TO ACTUALLY SEE THE MENU
 #very important
 
-app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
+
 
 #instance of the class
 
-ui = firstApp(MainWindow)
+
 
 
 from registration import *
 from PyQt5.QtWidgets import QMessageBox
 
-class registration_window(Registration_Ui):
+""" class registration_window(Registration_Ui):
     def __init__(self,window):
+        
         self.setupUi(window)
-        #this line connect the button called filter_button with a local function ShowMe
+        this line connect the button called filter_button with a local function ShowMe
         self.proceed_button.clicked.connect(self.collect_data)
         
         
-    
-    
 
-        
     def collect_data(self):
         
-        #figure out how to get the text
-        entry_name = self.name_entry.text()
-        entry_email = self.email_entry.text()
-        entry_password = self.password_entry.text()
-        print(entry_email)
         
-        if validation(entry_name,entry_email,entry_password) == "Valid":
-            #wooorks
             
-            ui = firstApp(MainWindow)
-            MainWindow.show()
-            
-        else:
-            self.name_entry.setText("")
-            self.email_entry.setText("")
-            self.password_entry.setText("")
-            
-            
+             """
 
-reg = registration_window(MainWindow)
-MainWindow.show()
-app.exec()
+if __name__ == "__main__":
+        
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+
+    #instance of the class
+
+    ui = firstApp(MainWindow)
+
+    MainWindow.show()
+
+    app.exec()
+
