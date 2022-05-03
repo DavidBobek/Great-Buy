@@ -64,7 +64,7 @@ class Basket:
         for x in self.items:
             totalValue += x.price
 
-        print(totalValue)
+       
         return totalValue
 
     def check_items(self):

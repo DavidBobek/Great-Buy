@@ -92,7 +92,3 @@ def deleting():
     con.commit()
     con.close()
     
-#deleting()
-controlling("s@gmail.com")
-
-#registering(davidko)

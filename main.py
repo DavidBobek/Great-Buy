@@ -8,14 +8,6 @@ from user import User
 import re
 
 
-def registration():
-    name = input("Enter your name: ")
-    email_address = input("Enter your email address: ")
-    password = input("Enter your password: ")
-    age = input("Enter your age: ")
-
-    validation(name, email_address, password, age)
-
 
 def validation(name, email_address, password):
     correctness = 1
@@ -44,7 +36,7 @@ def validation(name, email_address, password):
 
 def filterby_proccesor(warehouse, users_choice):
 
-    processorAMD_5 = []
+    """ processorAMD_5 = []
     processorAMD_7 = []
     processorAMD_9 = []
 
@@ -52,7 +44,17 @@ def filterby_proccesor(warehouse, users_choice):
     processorIntel_5 = []
     processorIntel_7 = []
     processorIntel_9 = []
-
+     """
+    
+    final = []
+    #this actually might be the final solution
+    for x in warehouse:
+        if x.processor == users_choice:
+            final.append(x)
+    print("done")
+    print(final)
+    return final
+""" 
     for x in warehouse:
         if x.processor == "AMD Ryzen 5":
             processorAMD_5.append(x)
@@ -103,7 +105,7 @@ def filterby_proccesor(warehouse, users_choice):
     if users_choice == "Intel Core i9":
         print(f"Returned all processors {processorIntel_9}")
         return processorIntel_9
-
+ """
 
 def filterby_storagetype(warehouse, users_choice):
     SSD_type = []
@@ -146,13 +148,6 @@ warhouseitems = []
         return filterby_storagetype(warhouseitems, userchoice)
  """
 
-davidko = User("david", "dbobek", "5454", 69)
-basket1 = Basket()
-basket1.calculate_total_value()
-
-davidko.assignbasket(basket1)
-
-print(basket1.items)
 # desc
 produkt1 = Product(
     "Produkt 1", "brand", 2, "screensize", "time", "AMD Ryzen 9", "b", "a", "helloo"
@@ -173,17 +168,7 @@ warhouseitems.append(produkt3)
 warhouseitems.append(produkt4)
 
 
-basket1.additem(produkt1)
-basket1.additem(produkt2)
-basket1.additem(produkt3)
-basket1.additem(produkt4)
 
-basket1.calculate_total_value()
-basket1.removeitem(produkt2)
-print(basket1.check_items())
-basket1.calculate_total_value()
-
-print(basket1.check_items())
 
 
 # objects
@@ -230,7 +215,7 @@ class firstApp(Ui_MainWindow):
         
         
     def openregistration(self):
-        print("chuj1")
+     
         self.window = QtWidgets.QMainWindow()
         self.ui = Registration_Ui()
         self.ui.setupUi(self.window)
@@ -282,7 +267,7 @@ class firstApp(Ui_MainWindow):
         
         for x in self.radio_procesors:
             if x.isChecked():
-                print("dsfg")
+                
                 #works, stores a text of the processor
                 pickedprocessor = x.text()
                 
