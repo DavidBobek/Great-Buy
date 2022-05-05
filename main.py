@@ -3,6 +3,7 @@ from concurrent.futures import process
 from time import process_time
 
 from numpy import append
+from View_Item import View_Item_UI
 from product import Product
 from product import Basket
 from user import User
@@ -406,10 +407,10 @@ class firstApp(Ui_MainWindow):
     def View_more(self):
      
         self.window = QtWidgets.QMainWindow()
-        self.ui = Registration_Ui()
+        self.ui = View_Item_UI()
         self.ui.setupUi(self.window)
         self.window.show()
-        self.ui.proceed_button.clicked.connect(self.checking)
+        
         
         
         print("shit")
