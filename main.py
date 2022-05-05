@@ -1,3 +1,4 @@
+from audioop import reverse
 from concurrent.futures import process
 from time import process_time
 
@@ -106,25 +107,73 @@ def filterby_proccesor(warehouse, users_choice):
         print(f"Returned all processors {processorIntel_9}")
         return processorIntel_9
  """
+ 
+ #FIX IT
+def filterby_screensize(warehouse,users_choice): 
+    
+    #"x<11"
+#'11\'\'≥x<14"'
+#'14"≥x<15.6"'
+#'15.6\'\'≥x<17.3"'
+#'x≥17.3"'
+
+
+    final = []
+    for x in warehouse:
+        if users_choice == "x<11":
+            final.append(x)
+        
+        if users_choice == '11\'\'≥x<14"':
+            final.append(x)
+            
+        if users_choice == '14"≥x<15.6"':
+            final.append(x)
+            
+        if users_choice == '15.6\'\'≥x<17.3"':
+            final.append(x)
+            
+        if users_choice == 'x≥17.3"':
+            final.append(x)
+            
+            
+    print(final)
+    return final
+    
+    smallest = users_choice[:3]
+    reversing = users_choice[::-1]
+    largest =users_choice[::3]
+    
+    
+    #this actually might be the final solution
+    for x in warehouse:
+        if x.screensize == users_choice:
+            final.append(x)
+    print("done")
+    print(final)
+    return final
+
+def filterby_color(warehouse,users_choice): 
+    
+    final = []
+    #this actually might be the final solution
+    for x in warehouse:
+        if x.color == users_choice:
+            final.append(x)
+    print("done")
+    print(final)
+    return final
+
+
 
 def filterby_storagetype(warehouse, users_choice):
-    SSD_type = []
-    HDD_type = []
-
+    final = []
+    #this actually might be the final solution
     for x in warehouse:
-        if x.storage_type == "SSD":
-            SSD_type.append(x)
-
-    for x in warehouse:
-        if x.storage_type == "HDD":
-            HDD_type.append(x)
-
-    if users_choice == "HDD":
-        return HDD_type
-
-    if users_choice == "SSD":
-        return SSD_type
-
+        if x.storage_type == users_choice:
+            final.append(x)
+    print("done")
+    print(final)
+    return final
     # search
 
 
@@ -150,16 +199,16 @@ warhouseitems = []
 
 # desc
 produkt1 = Product(
-    "Produkt 1", "brand", 2, "screensize", "time", "AMD Ryzen 9", "b", "a", "helloo"
+    "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
 )
 produkt2 = Product(
-    "Produkt 2", "brand", 2, "screensize", "time", "AMD Ryzen 9", "b", "a", "helloo"
+    "Produkt 2", "LENOVO", 2, "15,6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
 )
 produkt3 = Product(
-    "Produkt 3", "brand", 4, "screensize", "time", "Intel Core i5", "b", "a", "helloo"
+    "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
 )
 produkt4 = Product(
-    "Produkt 4", "brand ", 8, "screensize", "time", "Intel Core i3", "b", "a", "helloo"
+    "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
 )
 
 warhouseitems.append(produkt1)
@@ -194,6 +243,11 @@ class firstApp(Ui_MainWindow):
         self.setupUi(window)
         #this line connect the button called filter_button with a local function ShowMe
         self.filter_button.clicked.connect(self.getUsers_processor)
+        self.filter_button.clicked.connect(self.getUsers_sizes)
+        self.filter_button.clicked.connect(self.getUsers_color)
+        self.filter_button.clicked.connect(self.getUsers_type_of_storage)
+        
+        
         self.login_button.clicked.connect(self.openregistration)
         
         
@@ -202,7 +256,7 @@ class firstApp(Ui_MainWindow):
     
     
         #OPted for my own group boxes
-        
+        #Processors
         self.radio_procesors = []
         self.radio_procesors.append(self.Intel_9)
         self.radio_procesors.append(self.Intel_7)
@@ -213,6 +267,24 @@ class firstApp(Ui_MainWindow):
         self.radio_procesors.append(self.AMD7)
         self.radio_procesors.append(self.AMD5)
         
+        
+        #Screensizes
+        self.radio_screensizes = []
+        self.radio_screensizes.append(self.smallest)
+        self.radio_screensizes.append(self.lowermid)
+        self.radio_screensizes.append(self.mid)
+        self.radio_screensizes.append(self.uppermid)
+        self.radio_screensizes.append(self.largest)
+        
+        self.radio_color = []
+        self.radio_color.append(self.c_black)
+        self.radio_color.append(self.c_silver)
+        self.radio_color.append(self.c_white)
+        self.radio_color.append(self.c_gray)
+        
+        self.radio_storage = []
+        self.radio_storage.append(self.storage_ssd)
+        self.radio_storage.append(self.storage_HDD)
         
     def openregistration(self):
      
@@ -277,10 +349,82 @@ class firstApp(Ui_MainWindow):
                 print(f"Filtering {pickedprocessor}")
                 
                 
-    
+    def getUsers_sizes(self):
+        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
+        
+        
+        
+        #need to cycle through all of the groupboxes
+        
+        for x in self.radio_screensizes:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedscreensize = x.text()
+                
+                
+                #this function is filtering by providing the processor inside of the application
+                filterby_screensize(warhouseitems, pickedscreensize)
+                print(f"Filtering {pickedscreensize}")
+                
             
+    def getUsers_color(self):
+        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
+        
+        
+        
+        #need to cycle through all of the groupboxes
+        
+        for x in self.radio_color:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedscolor = x.text()
+                
+                
+                #this function is filtering by providing the processor inside of the application
+                filterby_color(warhouseitems, pickedscolor)
+                print(f"Filtering {pickedscolor}")
       
-    
+    def getUsers_type_of_storage(self):
+        for x in self.radio_storage:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedstorage = x.text()
+                
+                
+                #this function is filtering by providing the processor inside of the application
+                filterby_storagetype(warhouseitems, pickedstorage)
+                print(f"Filtering {pickedstorage}")
+        
+        
+        
+        
+        
+                
+    def View_more(self):
+     
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Registration_Ui()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.proceed_button.clicked.connect(self.checking)
+        
+        
+        print("shit")
+    #i have isolated the button from the original list Everything new 
+    def hookupmainbuttons(self,Everythingnew):
+        buttons = []
+        for x in Everythingnew:
+            buttons.append(x[1])
+            
+            
+        #assigned every single button to a function View_more
+        #not using self because it doesnt actually belong to this class
+        for x in buttons:
+            x.clicked.connect(self.View_more)
+            
 
 
 
@@ -306,6 +450,20 @@ if __name__ == "__main__":
     #instance of the class
 
     ui = firstApp(MainWindow)
+    Everythingnew = []
+    
+    #FUNCTION THAT IS CALLING STUFF FROM VISUAL TO MAKE IT MORE CLEANER
+    #1 to 5 means actually 1 to 4, limitation of for loop
+    for x in range(1,5):  
+        #Item = name
+        #
+        #x = iterator
+          
+        IterationItems = ui.make_groupbox("Item","dopice",x)
+        Everythingnew.append(IterationItems)
+    print(Everythingnew)
+    #calling the function to assign the buttons
+    ui.hookupmainbuttons(Everythingnew)
 
     MainWindow.show()
 

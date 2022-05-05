@@ -92,3 +92,7 @@ def deleting():
     con.commit()
     con.close()
     
+#deleting()
+
+
+#registering(davidko)
