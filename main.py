@@ -1,4 +1,5 @@
 from audioop import reverse
+from cgitb import small
 from concurrent.futures import process
 from time import process_time
 
@@ -119,32 +120,53 @@ def filterby_screensize(warehouse,users_choice):
 #'x≥17.3"'
 
 
+#'15.6\'\'≥x<17.3"'
+#'x≥17.3"'
+
+    smallest = []
+    lowmid = []
+    mid = []
+    high_mid = []
+    high = []
+    
+    
     final = []
     for x in warehouse:
-        if users_choice == "x<11":
-            final.append(x)
         
-        if users_choice == '11\'\'≥x<14"':
-            final.append(x)
+        if float(x.screensize) < 11:
+            smallest.append(x)       
+             
+        if float(x.screensize) >= 11 and float(x.screensize) < 14:
+            lowmid.append(x)
             
-        if users_choice == '14"≥x<15.6"':
-            final.append(x)
+        if float(x.screensize) >= 14 and float(x.screensize) < 15.6:
+            mid.append(x)
             
-        if users_choice == '15.6\'\'≥x<17.3"':
-            final.append(x)
-            
-        if users_choice == 'x≥17.3"':
-            final.append(x)
-            
-            
-    print(final)
-    return final
+        if float(x.screensize) >= 15.6  and float(x.screensize) < 17.3:
+            high_mid.append(x)    
+             
+        if float(x.screensize) > 17.3:       
+            high.append
+
     
-    smallest = users_choice[:3]
-    reversing = users_choice[::-1]
-    largest =users_choice[::3]
-    
-    
+    if users_choice == "x<11":
+        print(smallest)
+        return smallest
+    if users_choice == '11\'\'≥x<14"':
+        print(lowmid)
+        return lowmid
+    if users_choice == '14"≥x<15.6"':
+        print(mid)
+        return mid
+    if users_choice == '15.6\'\'≥x<17.3"':
+        print(high_mid)
+        return high_mid
+    if users_choice == 'x≥17.3"':
+        print(high)
+        return high
+
+   
+            
     #this actually might be the final solution
     for x in warehouse:
         if x.screensize == users_choice:
@@ -203,7 +225,7 @@ produkt1 = Product(
     "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
 )
 produkt2 = Product(
-    "Produkt 2", "LENOVO", 2, "15,6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+    "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
 )
 produkt3 = Product(
     "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
@@ -403,9 +425,9 @@ class firstApp(Ui_MainWindow):
         
         
         
-                
+    #popping up a new window          
     def View_more(self):
-     
+    
         self.window = QtWidgets.QMainWindow()
         self.ui = View_Item_UI()
         self.ui.setupUi(self.window)
@@ -458,10 +480,15 @@ if __name__ == "__main__":
     for x in range(1,5):  
         #Item = name
         #
-        #x = iterator
-          
+        #x = iterator  
+        
+        #NEED TO THINK OF A WAY ON HOW TO ACTUALLY CONNECT FILTERED ELEMENTS TO THE GROUP BOXES
         IterationItems = ui.make_groupbox("Item","dopice",x)
         Everythingnew.append(IterationItems)
+        
+        
+        
+        
     print(Everythingnew)
     #calling the function to assign the buttons
     ui.hookupmainbuttons(Everythingnew)
