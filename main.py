@@ -54,8 +54,8 @@ def filterby_proccesor(warehouse, users_choice):
     for x in warehouse:
         if x.processor == users_choice:
             final.append(x)
-    print("done")
-    print(final)
+    #print("done")
+    #print(final)
     return final
 """ 
     for x in warehouse:
@@ -150,19 +150,19 @@ def filterby_screensize(warehouse,users_choice):
 
     
     if users_choice == "x<11":
-        print(smallest)
+        #print(smallest)
         return smallest
     if users_choice == '11\'\'≥x<14"':
-        print(lowmid)
+        #print(lowmid)
         return lowmid
     if users_choice == '14"≥x<15.6"':
-        print(mid)
+        #print(mid)
         return mid
     if users_choice == '15.6\'\'≥x<17.3"':
-        print(high_mid)
+        #print(high_mid)
         return high_mid
     if users_choice == 'x≥17.3"':
-        print(high)
+        #print(high)
         return high
 
    
@@ -171,8 +171,8 @@ def filterby_screensize(warehouse,users_choice):
     for x in warehouse:
         if x.screensize == users_choice:
             final.append(x)
-    print("done")
-    print(final)
+    #print("done")
+    #print(final)
     return final
 
 def filterby_color(warehouse,users_choice): 
@@ -182,8 +182,8 @@ def filterby_color(warehouse,users_choice):
     for x in warehouse:
         if x.color == users_choice:
             final.append(x)
-    print("done")
-    print(final)
+   # print("done")
+    #print(final)
     return final
 
 
@@ -208,36 +208,7 @@ i9,Intel Core i7, Intel Core i5,Intel Core i3,AMD Ryzen 9,AMD Ryzen 7,AMD Ryzen
 5),Storage type(SSD\HDD), Color(Black,Silver,White,Gray),Screen Size"""
 
 
-warhouseitems = []
 
-
-
-""" def mainfilter(option):
-    if option == "processor":
-        return filterby_proccesor(warhouseitems, userchoice)
-
-    if option == "storage":
-        return filterby_storagetype(warhouseitems, userchoice)
- """
-
-# desc
-produkt1 = Product(
-    "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
-)
-produkt2 = Product(
-    "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
-)
-produkt3 = Product(
-    "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
-)
-produkt4 = Product(
-    "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
-)
-
-warhouseitems.append(produkt1)
-warhouseitems.append(produkt2)
-warhouseitems.append(produkt3)
-warhouseitems.append(produkt4)
 
 
 
@@ -261,6 +232,7 @@ import sys
 import database
 
 class firstApp(Ui_MainWindow):
+    
     def __init__(self,window):
         
         self.setupUi(window)
@@ -269,6 +241,8 @@ class firstApp(Ui_MainWindow):
         self.filter_button.clicked.connect(self.getUsers_sizes)
         self.filter_button.clicked.connect(self.getUsers_color)
         self.filter_button.clicked.connect(self.getUsers_type_of_storage)
+        self.filter_button.clicked.connect(self.mainfilter)
+        
         
         
         self.login_button.clicked.connect(self.openregistration)
@@ -309,6 +283,29 @@ class firstApp(Ui_MainWindow):
         self.radio_storage.append(self.storage_ssd)
         self.radio_storage.append(self.storage_HDD)
         
+    warhouseitems = []
+
+
+
+    
+    produkt1 = Product(
+        "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+    )
+    produkt2 = Product(
+        "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+    )
+    produkt3 = Product(
+        "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
+    )
+    produkt4 = Product(
+        "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
+    )
+
+    warhouseitems.append(produkt1)
+    warhouseitems.append(produkt2)
+    warhouseitems.append(produkt3)
+    warhouseitems.append(produkt4)
+            
     def openregistration(self):
      
         self.window = QtWidgets.QMainWindow()
@@ -368,7 +365,7 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_proccesor(warhouseitems, pickedprocessor)
+                filterby_proccesor(self.warhouseitems, pickedprocessor)
                 print(f"Filtering {pickedprocessor}")
                 
                 
@@ -387,7 +384,7 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_screensize(warhouseitems, pickedscreensize)
+                filterby_screensize(self.warhouseitems, pickedscreensize)
                 print(f"Filtering {pickedscreensize}")
                 
             
@@ -406,7 +403,7 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_color(warhouseitems, pickedscolor)
+                filterby_color(self.warhouseitems, pickedscolor)
                 print(f"Filtering {pickedscolor}")
       
     def getUsers_type_of_storage(self):
@@ -418,7 +415,7 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_storagetype(warhouseitems, pickedstorage)
+                filterby_storagetype(self.warhouseitems, pickedstorage)
                 print(f"Filtering {pickedstorage}")
         
         
@@ -435,7 +432,7 @@ class firstApp(Ui_MainWindow):
         
         
         
-        print("shit")
+        #print("shit")
     #i have isolated the button from the original list Everything new 
     def hookupmainbuttons(self,Everythingnew):
         buttons = []
@@ -448,6 +445,51 @@ class firstApp(Ui_MainWindow):
         for x in buttons:
             x.clicked.connect(self.View_more)
             
+    def mainfilter(self):
+        
+        for x in self.radio_storage:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedstorage = x.text()
+                
+        
+        for x in self.radio_color:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedscolor = x.text()
+                
+        
+        for x in self.radio_screensizes:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedscreensize = x.text()
+                
+                
+        for x in self.radio_procesors:
+            if x.isChecked():
+                
+                #works, stores a text of the processor
+                pickedprocessor = x.text()
+                
+                
+        
+        storage = filterby_storagetype(self.warhouseitems,pickedstorage)
+        color = filterby_color(self.warhouseitems,pickedscolor)
+        screensize = filterby_screensize(self.warhouseitems,pickedscreensize)
+        processor = filterby_proccesor(self.warhouseitems,pickedprocessor)
+        
+  
+
+        intersection_set = set.intersection(set(storage), set(color),set(screensize), set(processor))
+        intersection_list = list(intersection_set)
+        #THIS IS IT THIS IS THE FUNCTION THAT IS RETURNING ALL OF THE FLTERED PRODUCTS 
+        #FIX ====== if something is not chosen
+        print("This is the result")
+        print(intersection_list)  
+        return intersection_list
 
 
 
