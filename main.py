@@ -1,6 +1,7 @@
 from audioop import reverse
 from cgitb import small
 from concurrent.futures import process
+from heapq import merge
 from time import process_time
 from typing import final
 from unittest import result
@@ -332,11 +333,15 @@ class firstApp(Ui_MainWindow):
         produkt4 = Product(
             "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
         )
+        produkt5 = Product(
+            "Produkt 5", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+        )
 
         self.warhouseitems.append(produkt1)
         self.warhouseitems.append(produkt2)
         self.warhouseitems.append(produkt3)
         self.warhouseitems.append(produkt4)
+        self.warhouseitems.append(produkt5)
                 
     def openregistration(self):
      
@@ -502,24 +507,9 @@ class firstApp(Ui_MainWindow):
         
         
         all = storage_pick+color_pick+screensize_pick+processor_pick
-        """ paramms_not_None = []
-        if storage != None:
-            for x in storage:
-                paramms_not_None.append(x)
-            
-        if color != None:
-            for x in color:
-                paramms_not_None.append(x)
+
         
-        if screensize != None:
-            for x in screensize:
-                paramms_not_None.append(x)
         
-        if processor != None:
-            for x in processor:
-                paramms_not_None.append(x) """
-        
-        final_products = []
         Not_null_params = []
         
         if len(storage_pick) > 0:
@@ -539,20 +529,95 @@ class firstApp(Ui_MainWindow):
             
 
         print(Not_null_params)
-        # for x in all:
-        #     for y in Not_null_params:
-        #         pass
+        fav_stuff = {**fav_color,**fav_processor,**fav_storage,**fav_size}
+        
+        
+        filtered_elements = []
+        all = set(all)
+        for x in all:
+            #need to find a way on how to return all of the filtered items
+            
+            
+            if "color" in Not_null_params:
+                if x.color == fav_color.get("color"):
+                    filtered_elements.append(x)
+                    
+            
+            if "processor" in Not_null_params:
+                if x.processor == fav_processor.get("processor"):
+                    filtered_elements.append(x)
+                    
+            
+            if "storage_type" in Not_null_params:
+                if x.storage_type == fav_storage.get("storage_type"):
+                    filtered_elements.append(x)
+                    
+            my_Category = {}
+            if "screensize" in Not_null_params:
                 
+                
+                if float(x.screensize) <11:
+                    my_Category =  "x<11"
+                
+                if float(x.screensize)>=11 and float(x.screensize)<14:
+                    my_Category =  '11\'\'≥x<14"'
+                    
+                if float(x.screensize)>=14 and float(x.screensize)<15.6:
+                    
+                    my_Category =  '14"≥x<15.6"'
+                    
+                if float(x.screensize)>=15.5 and float(x.screensize) <17.3:
+                    my_Category =  '15.6\'\'≥x<17.3"'
+                if float(x.screensize) >17.3:
+                    my_Category = 'x≥17.3"'
+                    
+                    
+                if my_Category == fav_size.get("screensize"):
+                    filtered_elements.append(x)
+                    
+            if fav_color.get("color") == (x.color or None):
+                print("hello")
+            h1 =fav_color.get("color") 
+            h2 = fav_processor.get("processor")
+            h3 =fav_storage.get("storage_type") 
+            h4 = my_Category    
+            
+            if (fav_color == {} or fav_color.get("color") == x.color) and  (fav_processor == {} or fav_processor.get("processor") == x.processor) and (fav_storage == {} or fav_storage.get("storage_type") == x.storage_type)  and (my_Category == {} or my_Category==fav_size.get("screensize")):
+                print("gj")
+            
+            #if fav_color.get("color") == (x.color or None) and fav_processor.get("processor") == (x.processor or None ) and fav_storage.get("storage_type") == (x.storage_type or None ) :
+                print("yes")
+        
+        
+        #print("This is the result")         
+        #print(set(filtered_elements))
+            
+        """
+           if users_choice == {'screensize': "x<11"}:
+                #print(smallest)
+                return smallest
+            if users_choice == {'screensize': '11\'\'≥x<14"'}:
+                #print(lowmid)
+                return lowmid
+            if users_choice =={'screensize':  '14"≥x<15.6"'}:
+                #print(mid)
+                return mid
+            if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:
+                #print(high_mid)
+                return high_mid
+            if users_choice == {'screensize': 'x≥17.3"'}:
+                #print(high)
+                return high""" 
+                    
+
                 
                 
                 
 
         #THIS IS IT THIS IS THE FUNCTION THAT IS RETURNING ALL OF THE FLTERED PRODUCTS 
         #FIX ====== if something is not chosen
-        print("This is the result")
-        print(final_products)
+   
         
-        return final_products
     
 
 
