@@ -1,5 +1,4 @@
-from ast import Not
-import email
+
 import psycopg2
 
 

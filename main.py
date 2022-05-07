@@ -2,6 +2,8 @@ from audioop import reverse
 from cgitb import small
 from concurrent.futures import process
 from time import process_time
+from typing import final
+from unittest import result
 
 from numpy import append
 from View_Item import View_Item_UI
@@ -52,11 +54,20 @@ def filterby_proccesor(warehouse, users_choice):
     final = []
     #this actually might be the final solution
     for x in warehouse:
-        if x.processor == users_choice:
+        
+        if users_choice == {}:
+            return final
+        if x.processor == users_choice["processor"]:
             final.append(x)
+            
+        else:
+            pass
     #print("done")
     #print(final)
-    return final
+    if len(final) == 0:
+        return final
+    else:
+        return final
 """ 
     for x in warehouse:
         if x.processor == "AMD Ryzen 5":
@@ -146,22 +157,22 @@ def filterby_screensize(warehouse,users_choice):
             high_mid.append(x)    
              
         if float(x.screensize) > 17.3:       
-            high.append
+            high.append(x)
 
     
-    if users_choice == "x<11":
+    if users_choice == {'screensize': "x<11"}:
         #print(smallest)
         return smallest
-    if users_choice == '11\'\'≥x<14"':
+    if users_choice == {'screensize': '11\'\'≥x<14"'}:
         #print(lowmid)
         return lowmid
-    if users_choice == '14"≥x<15.6"':
+    if users_choice =={'screensize':  '14"≥x<15.6"'}:
         #print(mid)
         return mid
-    if users_choice == '15.6\'\'≥x<17.3"':
+    if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:
         #print(high_mid)
         return high_mid
-    if users_choice == 'x≥17.3"':
+    if users_choice == {'screensize': 'x≥17.3"'}:
         #print(high)
         return high
 
@@ -169,22 +180,35 @@ def filterby_screensize(warehouse,users_choice):
             
     #this actually might be the final solution
     for x in warehouse:
-        if x.screensize == users_choice:
+        
+        if users_choice == {}:
+            return final
+        if x.screensize == users_choice["screensize"]:
             final.append(x)
+        else:
+            pass
     #print("done")
     #print(final)
-    return final
+    if len(final) == 0:
+        return final
+    else:
+        return final
 
 def filterby_color(warehouse,users_choice): 
     
     final = []
     #this actually might be the final solution
     for x in warehouse:
-        if x.color == users_choice:
+        if users_choice == {}:
+            return final
+        if x.color == users_choice["color"]:
             final.append(x)
    # print("done")
     #print(final)
-    return final
+    if len(final) == 0:
+        return final
+    else:
+        return final
 
 
 
@@ -192,11 +216,19 @@ def filterby_storagetype(warehouse, users_choice):
     final = []
     #this actually might be the final solution
     for x in warehouse:
-        if x.storage_type == users_choice:
+        
+        if users_choice == {}:
+            return final
+        if x.storage_type == users_choice["storage_type"]:
             final.append(x)
+        else:
+            pass
     print("done")
     print(final)
-    return final
+    if len(final) == 0:
+        return final
+    else:
+        return final
     # search
 
 
@@ -283,29 +315,29 @@ class firstApp(Ui_MainWindow):
         self.radio_storage.append(self.storage_ssd)
         self.radio_storage.append(self.storage_HDD)
         
-    warhouseitems = []
+        self.warhouseitems = []
 
 
 
     
-    produkt1 = Product(
-        "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
-    )
-    produkt2 = Product(
-        "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
-    )
-    produkt3 = Product(
-        "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
-    )
-    produkt4 = Product(
-        "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
-    )
+        produkt1 = Product(
+            "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+        )
+        produkt2 = Product(
+            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+        )
+        produkt3 = Product(
+            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
+        )
+        produkt4 = Product(
+            "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
+        )
 
-    warhouseitems.append(produkt1)
-    warhouseitems.append(produkt2)
-    warhouseitems.append(produkt3)
-    warhouseitems.append(produkt4)
-            
+        self.warhouseitems.append(produkt1)
+        self.warhouseitems.append(produkt2)
+        self.warhouseitems.append(produkt3)
+        self.warhouseitems.append(produkt4)
+                
     def openregistration(self):
      
         self.window = QtWidgets.QMainWindow()
@@ -365,9 +397,12 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_proccesor(self.warhouseitems, pickedprocessor)
+                #filterby_proccesor(self.warhouseitems, pickedprocessor)
                 print(f"Filtering {pickedprocessor}")
-                
+                final_result = {"processor":pickedprocessor}
+                return final_result
+        return {}
+               
                 
     def getUsers_sizes(self):
         # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
@@ -384,10 +419,12 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_screensize(self.warhouseitems, pickedscreensize)
+                #filterby_screensize(self.warhouseitems, pickedscreensize)
                 print(f"Filtering {pickedscreensize}")
                 
-            
+                final_result = {"screensize":pickedscreensize}
+                return final_result
+        return {}
     def getUsers_color(self):
         # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
         
@@ -403,8 +440,11 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_color(self.warhouseitems, pickedscolor)
+                #filterby_color(self.warhouseitems, pickedscolor)
                 print(f"Filtering {pickedscolor}")
+                final_result = {"color":pickedscolor}
+                return final_result
+        return {}
       
     def getUsers_type_of_storage(self):
         for x in self.radio_storage:
@@ -415,9 +455,11 @@ class firstApp(Ui_MainWindow):
                 
                 
                 #this function is filtering by providing the processor inside of the application
-                filterby_storagetype(self.warhouseitems, pickedstorage)
+                #filterby_storagetype(self.warhouseitems, pickedstorage)
                 print(f"Filtering {pickedstorage}")
-        
+                final_result = {"storage_type":pickedstorage}
+                return final_result
+        return {}
         
         
         
@@ -446,50 +488,72 @@ class firstApp(Ui_MainWindow):
             x.clicked.connect(self.View_more)
             
     def mainfilter(self):
+        fav_color = self.getUsers_color()
+        fav_processor = self.getUsers_processor()
+        fav_size = self.getUsers_sizes()
+        fav_storage = self.getUsers_type_of_storage()
         
-        for x in self.radio_storage:
-            if x.isChecked():
-                
-                #works, stores a text of the processor
-                pickedstorage = x.text()
-                
+       
         
-        for x in self.radio_color:
-            if x.isChecked():
-                
-                #works, stores a text of the processor
-                pickedscolor = x.text()
-                
+        storage_pick = filterby_storagetype(self.warhouseitems,fav_storage)
+        color_pick = filterby_color(self.warhouseitems,fav_color)
+        screensize_pick = filterby_screensize(self.warhouseitems,fav_size)
+        processor_pick = filterby_proccesor(self.warhouseitems,fav_processor)
         
-        for x in self.radio_screensizes:
-            if x.isChecked():
-                
-                #works, stores a text of the processor
-                pickedscreensize = x.text()
-                
-                
-        for x in self.radio_procesors:
-            if x.isChecked():
-                
-                #works, stores a text of the processor
-                pickedprocessor = x.text()
-                
-                
         
-        storage = filterby_storagetype(self.warhouseitems,pickedstorage)
-        color = filterby_color(self.warhouseitems,pickedscolor)
-        screensize = filterby_screensize(self.warhouseitems,pickedscreensize)
-        processor = filterby_proccesor(self.warhouseitems,pickedprocessor)
+        all = storage_pick+color_pick+screensize_pick+processor_pick
+        """ paramms_not_None = []
+        if storage != None:
+            for x in storage:
+                paramms_not_None.append(x)
+            
+        if color != None:
+            for x in color:
+                paramms_not_None.append(x)
         
-  
+        if screensize != None:
+            for x in screensize:
+                paramms_not_None.append(x)
+        
+        if processor != None:
+            for x in processor:
+                paramms_not_None.append(x) """
+        
+        final_products = []
+        Not_null_params = []
+        
+        if len(storage_pick) > 0:
+            Not_null_params.append("storage_type")
+            
+        
+        if len(color_pick) > 0:
+            Not_null_params.append("color")
+            
+        
+        if len(processor_pick) > 0:
+            Not_null_params.append("processor")
+            
+        
+        if len(screensize_pick) > 0:
+            Not_null_params.append("screensize")
+            
 
-        intersection_set = set.intersection(set(storage), set(color),set(screensize), set(processor))
-        intersection_list = list(intersection_set)
+        print(Not_null_params)
+        # for x in all:
+        #     for y in Not_null_params:
+        #         pass
+                
+                
+                
+                
+
         #THIS IS IT THIS IS THE FUNCTION THAT IS RETURNING ALL OF THE FLTERED PRODUCTS 
         #FIX ====== if something is not chosen
         print("This is the result")
-        print(intersection_list)  
-        return intersection_list
+        print(final_products)
+        
+        return final_products
+    
 
 
 
@@ -531,7 +595,7 @@ if __name__ == "__main__":
         
         
         
-    print(Everythingnew)
+   
     #calling the function to assign the buttons
     ui.hookupmainbuttons(Everythingnew)
 

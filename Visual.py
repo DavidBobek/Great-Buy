@@ -174,7 +174,7 @@ class Ui_MainWindow(object):
         self.filter_color_2.setTitle(_translate("MainWindow", "Color"))
         self.c_black.setText(_translate("MainWindow", "Black"))
         self.c_silver.setText(_translate("MainWindow", "Silver"))
-        self.c_white.setText(_translate("MainWindow", "white"))
+        self.c_white.setText(_translate("MainWindow", "White"))
         self.c_gray.setText(_translate("MainWindow", "Gray"))
         self.filter_storagetype.setTitle(_translate("MainWindow", "Storage Type"))
         self.storage_ssd.setText(_translate("MainWindow", "SSD"))
