@@ -322,19 +322,49 @@ class firstApp(Ui_MainWindow):
 
     
         produkt1 = Product(
-            "Produkt 1", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+            "Produkt 1", "ASUS", 2, "12", "time", "Intel Core i7", "SSD", "Black", "helloo"
         )
         produkt2 = Product(
-            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Gray", "helloo"
         )
         produkt3 = Product(
-            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "White", "helloo"
+            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "Gray", "helloo"
         )
         produkt4 = Product(
             "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
         )
         produkt5 = Product(
-            "Produkt 5", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+            "Produkt 5", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "White", "helloo"
+        )
+        produkt6 = Product(
+            "Produkt 1", "ASUS", 2, "15", "time", "Intel Core i3", "SSD", "Black", "helloo"
+        )
+        produkt7 = Product(
+            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
+        )
+        produkt8 = Product(
+            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i9", "HDD", "White", "helloo"
+        )
+        produkt9 = Product(
+            "Produkt 4", "ACER ", 8, "17", "time", "Intel Core i3", "HDD", "Silver", "helloo"
+        )
+        produkt10 = Product(
+            "Produkt 5", "ASUS", 2, "10", "time", "AMD Ryzen 5", "SSD", "Gray", "helloo"
+        )
+        produkt11 = Product(
+            "Produkt 1", "ASUS", 2, "14", "time", "AMD Ryzen 5", "SSD", "Gray", "helloo"
+        )
+        produkt12 = Product(
+            "Produkt 2", "LENOVO", 2, "13.6", "time", "AMD Ryzen 7", "SSD", "Black", "helloo"
+        )
+        produkt13 = Product(
+            "Produkt 3", "MAC", 4, "16", "time", "Intel Core i5", "HDD", "White", "helloo"
+        )
+        produkt14 = Product(
+            "Produkt 4", "ACER ", 8, "14.5", "time", "Intel Core i5", "HDD", "Silver", "helloo"
+        )
+        produkt15 = Product(
+            "Produkt 5", "ASUS", 2, "14.8", "time", "AMD Ryzen 7", "HDD", "Gray", "helloo"
         )
 
         self.warhouseitems.append(produkt1)
@@ -342,6 +372,16 @@ class firstApp(Ui_MainWindow):
         self.warhouseitems.append(produkt3)
         self.warhouseitems.append(produkt4)
         self.warhouseitems.append(produkt5)
+        self.warhouseitems.append(produkt6)
+        self.warhouseitems.append(produkt7)
+        self.warhouseitems.append(produkt8)
+        self.warhouseitems.append(produkt9)
+        self.warhouseitems.append(produkt10)
+        self.warhouseitems.append(produkt11)
+        self.warhouseitems.append(produkt12)
+        self.warhouseitems.append(produkt13)
+        self.warhouseitems.append(produkt14)
+        self.warhouseitems.append(produkt15)
                 
     def openregistration(self):
      
@@ -493,23 +533,25 @@ class firstApp(Ui_MainWindow):
             x.clicked.connect(self.View_more)
             
     def mainfilter(self):
+        #gathering the color from the inputs
         fav_color = self.getUsers_color()
         fav_processor = self.getUsers_processor()
         fav_size = self.getUsers_sizes()
         fav_storage = self.getUsers_type_of_storage()
         
        
-        
+        #creating multiple variables that are going to hold filtered items just by a single category
         storage_pick = filterby_storagetype(self.warhouseitems,fav_storage)
         color_pick = filterby_color(self.warhouseitems,fav_color)
         screensize_pick = filterby_screensize(self.warhouseitems,fav_size)
         processor_pick = filterby_proccesor(self.warhouseitems,fav_processor)
         
         
+        #all filtered categories
         all = storage_pick+color_pick+screensize_pick+processor_pick
 
         
-        
+        #checking which parameters are being filtered
         Not_null_params = []
         
         if len(storage_pick) > 0:
