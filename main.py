@@ -529,13 +529,13 @@ class firstApp(Ui_MainWindow):
             
 
         print(Not_null_params)
-        fav_stuff = {**fav_color,**fav_processor,**fav_storage,**fav_size}
-        
+
         
         filtered_elements = []
+        final_products = []
         all = set(all)
         for x in all:
-            #need to find a way on how to return all of the filtered items
+
             
             
             if "color" in Not_null_params:
@@ -575,50 +575,13 @@ class firstApp(Ui_MainWindow):
                 if my_Category == fav_size.get("screensize"):
                     filtered_elements.append(x)
                     
-            if fav_color.get("color") == (x.color or None):
-                print("hello")
-            h1 =fav_color.get("color") 
-            h2 = fav_processor.get("processor")
-            h3 =fav_storage.get("storage_type") 
-            h4 = my_Category    
             
             if (fav_color == {} or fav_color.get("color") == x.color) and  (fav_processor == {} or fav_processor.get("processor") == x.processor) and (fav_storage == {} or fav_storage.get("storage_type") == x.storage_type)  and (my_Category == {} or my_Category==fav_size.get("screensize")):
-                print("gj")
-            
-            #if fav_color.get("color") == (x.color or None) and fav_processor.get("processor") == (x.processor or None ) and fav_storage.get("storage_type") == (x.storage_type or None ) :
-                print("yes")
-        
-        
-        #print("This is the result")         
-        #print(set(filtered_elements))
-            
-        """
-           if users_choice == {'screensize': "x<11"}:
-                #print(smallest)
-                return smallest
-            if users_choice == {'screensize': '11\'\'≥x<14"'}:
-                #print(lowmid)
-                return lowmid
-            if users_choice =={'screensize':  '14"≥x<15.6"'}:
-                #print(mid)
-                return mid
-            if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:
-                #print(high_mid)
-                return high_mid
-            if users_choice == {'screensize': 'x≥17.3"'}:
-                #print(high)
-                return high""" 
-                    
-
-                
-                
-                
-
-        #THIS IS IT THIS IS THE FUNCTION THAT IS RETURNING ALL OF THE FLTERED PRODUCTS 
-        #FIX ====== if something is not chosen
-   
-        
-    
+                final_products.append(x)
+        print(final_products)
+        print("\n")
+        print("fuck we are done")
+        return final_products
 
 
 
