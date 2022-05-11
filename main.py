@@ -442,9 +442,15 @@ class firstApp(Ui_MainWindow):
             x.clicked.connect(self.View_more)
             
             
-    def hook_item_functions(self,buttons):
-        for x in buttons.button_list:
+    def hook_item_functions(self,widgets,_items):
+        for x in widgets.button_list:
             x.clicked.connect(self.View_more)
+        
+        counter = 0
+        for x in widgets.Labellist:
+            
+            x.setText(_items[counter].name)
+            counter += 1
     
     """    def openProducts(self):
         self.window = QtWidgets.QMainWindow()
@@ -563,7 +569,7 @@ class firstApp(Ui_MainWindow):
     def View_items(self,_items):
         self.window = QtWidgets.QMainWindow()
         self.scroll = Scrolling(_items)
-        ui.hook_item_functions(self.scroll)
+        ui.hook_item_functions(self.scroll,_items)
        
        
         

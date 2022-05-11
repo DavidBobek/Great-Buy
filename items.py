@@ -22,14 +22,14 @@ class Scrolling(QWidget):
         groupBox = QGroupBox("This is the groupbox")
         
        
-        Labellist = []
+        self.Labellist = []
         self.button_list = []
         
         var= len(_items)
         for i in range(var):
-            Labellist.append(QLabel("hi"))
+            self.Labellist.append(QLabel("hi"))
             self.button_list.append(QPushButton("click"))
-            formLayout.addRow(Labellist[i],self.button_list[i])
+            formLayout.addRow(self.Labellist[i],self.button_list[i])
             
         
         groupBox.setLayout(formLayout)
