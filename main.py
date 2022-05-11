@@ -63,77 +63,14 @@ def filterby_proccesor(warehouse, users_choice):
             
         else:
             pass
-    #print("done")
-    #print(final)
+  
     if len(final) == 0:
         return final
     else:
         return final
-""" 
-    for x in warehouse:
-        if x.processor == "AMD Ryzen 5":
-            processorAMD_5.append(x)
 
-        if x.processor == "AMD Ryzen 7":
-            processorAMD_7.append(x)
-
-        if x.processor == "AMD Ryzen 9":
-            processorAMD_9.append(x)
-            print(len(processorAMD_9))
-
-        if x.processor == "Intel Core i3":
-            processorIntel_3.append(x)
-
-        if x.processor == "Intel Core i5":
-            processorIntel_5.append(x)
-
-        if x.processor == "Intel Core i7":
-            processorIntel_7.append(x)
-
-        if x.processor == "Intel Core i9":
-            processorIntel_9.append(x)
-
-    if users_choice == "AMD Ryzen 5":
-        print(f"Returned all processors {processorAMD_5}")
-        return processorAMD_5
-
-    if users_choice == "AMD Ryzen 7":
-        print(f"Returned all processors {processorAMD_7}")
-        return processorAMD_7
-
-    if users_choice == "AMD Ryzen 9":
-        print(f"Returned all processors {processorAMD_9}")
-        return processorAMD_9
-
-    if users_choice == "Intel Core i3":
-        print(f"Returned all processors {processorIntel_3}")
-        return processorIntel_3
-
-    if users_choice == "Intel Core i5":
-        print(f"Returned all processors {processorIntel_5}")
-        return processorIntel_5
-
-    if users_choice == "Intel Core i7":
-        print(f"Returned all processors {processorIntel_7}")
-        return processorIntel_7
-
-    if users_choice == "Intel Core i9":
-        print(f"Returned all processors {processorIntel_9}")
-        return processorIntel_9
- """
- 
- #FIX IT
 def filterby_screensize(warehouse,users_choice): 
-    
-    #"x<11"
-#'11\'\'≥x<14"'
-#'14"≥x<15.6"'
-#'15.6\'\'≥x<17.3"'
-#'x≥17.3"'
 
-
-#'15.6\'\'≥x<17.3"'
-#'x≥17.3"'
 
     smallest = []
     lowmid = []
@@ -162,19 +99,19 @@ def filterby_screensize(warehouse,users_choice):
 
     
     if users_choice == {'screensize': "x<11"}:
-        #print(smallest)
+        
         return smallest
     if users_choice == {'screensize': '11\'\'≥x<14"'}:
-        #print(lowmid)
+        
         return lowmid
     if users_choice =={'screensize':  '14"≥x<15.6"'}:
-        #print(mid)
+    
         return mid
     if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:
-        #print(high_mid)
+      
         return high_mid
     if users_choice == {'screensize': 'x≥17.3"'}:
-        #print(high)
+    
         return high
 
    
@@ -188,8 +125,7 @@ def filterby_screensize(warehouse,users_choice):
             final.append(x)
         else:
             pass
-    #print("done")
-    #print(final)
+  
     if len(final) == 0:
         return final
     else:
@@ -198,14 +134,13 @@ def filterby_screensize(warehouse,users_choice):
 def filterby_color(warehouse,users_choice): 
     
     final = []
-    #this actually might be the final solution
+
     for x in warehouse:
         if users_choice == {}:
             return final
         if x.color == users_choice["color"]:
             final.append(x)
-   # print("done")
-    #print(final)
+
     if len(final) == 0:
         return final
     else:
@@ -224,42 +159,16 @@ def filterby_storagetype(warehouse, users_choice):
             final.append(x)
         else:
             pass
-    print("done")
-    print(final)
+ 
     if len(final) == 0:
         return final
     else:
         return final
-    # search
-
-
-
-
-
-    """. Filter = Is going to then display Laptops that can be filtered by = processor (Intel Core
-i9,Intel Core i7, Intel Core i5,Intel Core i3,AMD Ryzen 9,AMD Ryzen 7,AMD Ryzen
-5),Storage type(SSD\HDD), Color(Black,Silver,White,Gray),Screen Size"""
-
-
-
-
-
-
-
-
-# objects
-#print(mainfilter("processor"))
-
-# set to filter for AMD Ryzen 9
-""" for x in mainfilter("processor"):
-    print(x.processor) """
-
-
 
 
 
 from Visual import *
-
+from items import Scrolling
 import sys
 
 import database
@@ -275,7 +184,7 @@ class firstApp(Ui_MainWindow):
         self.filter_button.clicked.connect(self.getUsers_color)
         self.filter_button.clicked.connect(self.getUsers_type_of_storage)
         self.filter_button.clicked.connect(self.mainfilter)
-        
+    
         
         
         self.login_button.clicked.connect(self.openregistration)
@@ -532,6 +441,18 @@ class firstApp(Ui_MainWindow):
         for x in buttons:
             x.clicked.connect(self.View_more)
             
+            
+    def hook_item_functions(self,buttons):
+        for x in buttons.button_list:
+            x.clicked.connect(self.View_more)
+    
+    """    def openProducts(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Scrolling(20)
+        self.ui.setupUi(self.window)
+        self.window.show() """
+        
+    
     def mainfilter(self):
         #gathering the color from the inputs
         fav_color = self.getUsers_color()
@@ -623,9 +544,29 @@ class firstApp(Ui_MainWindow):
         print(final_products)
         print("\n")
         print("fuck we are done")
+        #self.openProducts()
+        #https://www.youtube.com/watch?v=TXZkHy2koyo
+        #prods = Scrolling(len(final_products))
+        
+       
+     
+        
+        for x in range(1,len(final_products)):
+            ui.make_groupbox("C,","c",x)
+            
+     
+        
+        
+        self.View_items(final_products)
         return final_products
 
-
+    def View_items(self,_items):
+        self.window = QtWidgets.QMainWindow()
+        self.scroll = Scrolling(_items)
+        ui.hook_item_functions(self.scroll)
+       
+       
+        
 
 #ALLOWS US TO ACTUALLY SEE THE MENU
 #very important
@@ -634,14 +575,20 @@ class firstApp(Ui_MainWindow):
 
 #instance of the class
 
-
-
-
 from registration import *
-from PyQt5.QtWidgets import QMessageBox
 
 
-if __name__ == "__main__":
+
+
+from PyQt5.QtWidgets import QMessageBox,QApplication,QWidget,QScrollArea,QFormLayout,QLabel,QPushButton,QGroupBox,QVBoxLayout
+from PyQt5 import QtGui
+import sys
+
+
+
+start = 0
+while start == 0:
+    start = 2
         
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -653,7 +600,7 @@ if __name__ == "__main__":
     
     #FUNCTION THAT IS CALLING STUFF FROM VISUAL TO MAKE IT MORE CLEANER
     #1 to 5 means actually 1 to 4, limitation of for loop
-    for x in range(1,5):  
+    for x in range(1,3):  
         #Item = name
         #
         #x = iterator  
@@ -672,4 +619,4 @@ if __name__ == "__main__":
     MainWindow.show()
 
     app.exec()
-
+   

@@ -19,6 +19,7 @@ import datetime
 
 class Product:
     def __init__(
+       # *,
         self,
         name,
         brand,
@@ -41,6 +42,9 @@ class Product:
         self.color = color
         self.description = description
         self.reviews = {}
+        
+    def __repr__(self) -> str:
+        return f'{type(self).__name__} {self.name}, {self.price}'
 
 
 class Basket:
