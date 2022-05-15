@@ -43,8 +43,7 @@ class Product:
         self.description = description
         self.reviews = {}
         
-    def __repr__(self) -> str:
-        return f'{type(self).__name__} {self.name}, {self.price}'
+
 
 
 class Basket:
@@ -78,16 +77,3 @@ class Basket:
         return itemnames
 
 
-""" produkt1 = Product("Produkt 1","b",2,"a","b","a","b","a","helloo")
-produkt2 = Product("Produkt 2","b",2,"a","b","a","b","a","helloo")
-produkt3 = Product("Produkt 3","b",4,"a","b","a","b","a","helloo")
-produkt4 = Product("Produkt 4","b",8,"a","b","a","b","a","helloo")
-
-basket1 = Basket()
-
-basket1.additem(produkt1)
-basket1.additem(produkt2)
-basket1.additem(produkt3)
-basket1.additem(produkt4)
-
-basket1.calculate_total_value() """

@@ -2,6 +2,7 @@ from audioop import reverse
 from cgitb import small
 from concurrent.futures import process
 from heapq import merge
+from pkgutil import iter_modules
 from time import process_time
 from typing import final
 from unittest import result
@@ -419,45 +420,48 @@ class firstApp(Ui_MainWindow):
         
         
     #popping up a new window          
-    def View_more(self):
-    
+    def View_more(self,items,pos):
+        
+        item = items[pos][0]
+        
         self.window = QtWidgets.QMainWindow()
         self.ui = View_Item_UI()
+       
         self.ui.setupUi(self.window)
+
+        print(items)
+       
+        ############## Right now iam passing all of the filtered items
+        ############## Need to find a way how to assign eahc of them to the button
+        ############## Probably inside here
+        
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.label_Color.setText(_translate("MainWindow", item.color))
+        self.ui.label_Name.setText(_translate("MainWindow", item.name))
+        #self.ui.label_price.setText(_translate("MainWindow", items[position].price))
+        self.ui.label_processor.setText(_translate("MainWindow", item.processor))
+        self.ui.label_storage.setText(_translate("MainWindow", item.storage_type))
+        self.ui.label_about.setText(_translate("MainWindow", item.description))
+        self.ui.label_screensize.setText(_translate("MainWindow", item.screensize))
         self.window.show()
-        
-        
-        
-        #print("shit")
-    #i have isolated the button from the original list Everything new 
-    def hookupmainbuttons(self,Everythingnew):
-        buttons = []
-        for x in Everythingnew:
-            buttons.append(x[1])
-            
-            
-        #assigned every single button to a function View_more
-        #not using self because it doesnt actually belong to this class
-        for x in buttons:
-            x.clicked.connect(self.View_more)
-            
             
     def hook_item_functions(self,widgets,_items):
-        for x in widgets.button_list:
-            x.clicked.connect(self.View_more)
+        counting = 0
         
+    
+        
+        for x in range(len(widgets.button_list)):
+            if counting< len(_items):
+                widgets.button_list[x].clicked.connect(lambda ch, x=x: self.View_more(_items,x))
+                counting += 1
+
         counter = 0
         for x in widgets.Labellist:
             
-            x.setText(_items[counter].name)
+            x.setText(f"Name: {_items[counter][0].name}, Brand: {_items[counter][0].brand}, Price: {_items[counter][0].processor}")
             counter += 1
     
-    """    def openProducts(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Scrolling(20)
-        self.ui.setupUi(self.window)
-        self.window.show() """
-        
+
     
     def mainfilter(self):
         #gathering the color from the inputs
@@ -569,7 +573,10 @@ class firstApp(Ui_MainWindow):
     def View_items(self,_items):
         self.window = QtWidgets.QMainWindow()
         self.scroll = Scrolling(_items)
-        ui.hook_item_functions(self.scroll,_items)
+        items_dic = {}
+        for x in range(len(_items)):
+            items_dic[x] = [_items[x]] 
+        ui.hook_item_functions(self.scroll,items_dic)
        
        
         
@@ -620,7 +627,7 @@ while start == 0:
         
    
     #calling the function to assign the buttons
-    ui.hookupmainbuttons(Everythingnew)
+    #ui.hookupmainbuttons(Everythingnew)
 
     MainWindow.show()
 

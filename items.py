@@ -7,8 +7,8 @@ class Scrolling(QWidget):
         self.title = "scroll area"
         self.left = 500 
         self.top = 200
-        self.width_ = 300
-        self.height_ = 250
+        self.width_ = 500
+        self.height_ = 400
         self.iconName = 'home.png'
         
         
@@ -23,12 +23,12 @@ class Scrolling(QWidget):
         
        
         self.Labellist = []
-        self.button_list = []
+        self.button_list = {}
         
         var= len(_items)
         for i in range(var):
             self.Labellist.append(QLabel("hi"))
-            self.button_list.append(QPushButton("click"))
+            self.button_list[i] = QPushButton("click")
             formLayout.addRow(self.Labellist[i],self.button_list[i])
             
         
