@@ -178,6 +178,8 @@ class firstApp(Ui_MainWindow):
     
     def __init__(self,window):
         
+       
+        
         self.setupUi(window)
         #this line connect the button called filter_button with a local function ShowMe
         self.filter_button.clicked.connect(self.getUsers_processor)
@@ -428,8 +430,10 @@ class firstApp(Ui_MainWindow):
         self.ui = View_Item_UI()
        
         self.ui.setupUi(self.window)
+        self.ui.button_add_to_cart.clicked.connect(lambda: ui.add_to_cart(item))
+        
 
-        print(items)
+      
        
         ############## Right now iam passing all of the filtered items
         ############## Need to find a way how to assign eahc of them to the button
@@ -444,6 +448,13 @@ class firstApp(Ui_MainWindow):
         self.ui.label_about.setText(_translate("MainWindow", item.description))
         self.ui.label_screensize.setText(_translate("MainWindow", item.screensize))
         self.window.show()
+        
+    def add_to_cart(self,item):
+        print("hhhhhhhhhhhh")
+        print(item.processor)
+        current_user.assignbasket(current_basket)
+        current_basket.additem(item)
+        print(current_basket.items)
             
     def hook_item_functions(self,widgets,_items):
         counting = 0
@@ -554,25 +565,14 @@ class firstApp(Ui_MainWindow):
         print(final_products)
         print("\n")
         print("fuck we are done")
-        #self.openProducts()
-        #https://www.youtube.com/watch?v=TXZkHy2koyo
-        #prods = Scrolling(len(final_products))
-        
-       
-     
-        
-        for x in range(1,len(final_products)):
-            ui.make_groupbox("C,","c",x)
-            
-     
-        
-        
+   
         self.View_items(final_products)
         return final_products
 
     def View_items(self,_items):
         self.window = QtWidgets.QMainWindow()
         self.scroll = Scrolling(_items)
+        
         items_dic = {}
         for x in range(len(_items)):
             items_dic[x] = [_items[x]] 
@@ -602,6 +602,9 @@ import sys
 start = 0
 while start == 0:
     start = 2
+    
+    current_user = User("defualt","default@mail.com","adminADMIN1",20)
+    current_basket = Basket()
         
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -610,24 +613,6 @@ while start == 0:
 
     ui = firstApp(MainWindow)
     Everythingnew = []
-    
-    #FUNCTION THAT IS CALLING STUFF FROM VISUAL TO MAKE IT MORE CLEANER
-    #1 to 5 means actually 1 to 4, limitation of for loop
-    for x in range(1,3):  
-        #Item = name
-        #
-        #x = iterator  
-        
-        #NEED TO THINK OF A WAY ON HOW TO ACTUALLY CONNECT FILTERED ELEMENTS TO THE GROUP BOXES
-        IterationItems = ui.make_groupbox("Item","dopice",x)
-        Everythingnew.append(IterationItems)
-        
-        
-        
-        
-   
-    #calling the function to assign the buttons
-    #ui.hookupmainbuttons(Everythingnew)
 
     MainWindow.show()
 
