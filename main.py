@@ -548,13 +548,6 @@ class firstApp(Ui_MainWindow):
             items_dic[x] = [_items[x]] 
         ui.hook_item_functions(self.scroll,items_dic)
        
-       
-        
-
-#ALLOWS US TO ACTUALLY SEE THE MENU
-#very important
-
-
 
 #instance of the class
 
@@ -563,7 +556,7 @@ from registration import *
 
 
 
-from PyQt5.QtWidgets import QMessageBox,QApplication,QWidget,QScrollArea,QFormLayout,QLabel,QPushButton,QGroupBox,QVBoxLayout
+""" from PyQt5.QtWidgets import QMessageBox,QApplication,QWidget,QScrollArea,QFormLayout,QLabel,QPushButton,QGroupBox,QVBoxLayout """
 from PyQt5 import QtGui
 import sys
 
