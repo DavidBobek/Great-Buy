@@ -313,6 +313,7 @@ class firstApp(Ui_MainWindow):
         
         if validation(entry_name,entry_email,entry_password) == "Valid":
             if database.controlling(entry_email) == "Not":    
+                global newUser
                 newUser = User(entry_name,entry_email,entry_password,18)
                 database.registering(newUser)
                 print("User registered")
@@ -452,7 +453,11 @@ class firstApp(Ui_MainWindow):
     def add_to_cart(self,item):
         print("hhhhhhhhhhhh")
         print(item.processor)
-        current_user.assignbasket(current_basket)
+        try:
+            newUser.assignbasket(current_basket)
+        except:
+            
+            stock_user.assignbasket(current_basket)
         current_basket.additem(item)
         print(current_basket.items)
             
@@ -512,7 +517,7 @@ class firstApp(Ui_MainWindow):
             Not_null_params.append("screensize")
             
 
-        print(Not_null_params)
+        
 
         
         filtered_elements = []
@@ -564,7 +569,7 @@ class firstApp(Ui_MainWindow):
                 final_products.append(x)
         print(final_products)
         print("\n")
-        print("fuck we are done")
+        
    
         self.View_items(final_products)
         return final_products
@@ -603,7 +608,7 @@ start = 0
 while start == 0:
     start = 2
     
-    current_user = User("defualt","default@mail.com","adminADMIN1",20)
+    stock_user = User("defualt","default@mail.com","adminADMIN1",20)
     current_basket = Basket()
         
     app = QtWidgets.QApplication(sys.argv)

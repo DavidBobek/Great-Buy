@@ -27,7 +27,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1122, 749)
+        MainWindow.resize(500, 749)
         MainWindow.setStyleSheet("background-color:rgb(247, 255, 240)")
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
         self.AMD5.setObjectName("AMD5")
         self.verticalLayout.addWidget(self.filter_processor)
         self.shopping_button = QtWidgets.QPushButton(self.centralwidget)
-        self.shopping_button.setGeometry(QtCore.QRect(1010, 0, 111, 41))
+        self.shopping_button.setGeometry(QtCore.QRect(390, 0, 111, 41))
         self.shopping_button.setStyleSheet("background-color:rgb(132, 255, 94)")
         self.shopping_button.setObjectName("shopping_button")
         self.login_button = QtWidgets.QPushButton(self.centralwidget)
