@@ -341,80 +341,45 @@ class firstApp(Ui_MainWindow):
     
     
     def getUsers_processor(self):
-        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
-        
-        
-        
-        #need to cycle through all of the groupboxes
-        
         for x in self.radio_procesors:
-            if x.isChecked():
-                
+            if x.isChecked():               
                 #works, stores a text of the processor
-                pickedprocessor = x.text()
-                
-                
+                pickedprocessor = x.text()       
                 #this function is filtering by providing the processor inside of the application
                 #filterby_proccesor(self.warhouseitems, pickedprocessor)
-                print(f"Filtering {pickedprocessor}")
+
                 final_result = {"processor":pickedprocessor}
                 return final_result
         return {}
                
                 
     def getUsers_sizes(self):
-        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
-        
-        
-        
-        #need to cycle through all of the groupboxes
-        
         for x in self.radio_screensizes:
-            if x.isChecked():
-                
+            if x.isChecked():  
                 #works, stores a text of the processor
                 pickedscreensize = x.text()
-                
-                
+                            
                 #this function is filtering by providing the processor inside of the application
                 #filterby_screensize(self.warhouseitems, pickedscreensize)
-                print(f"Filtering {pickedscreensize}")
-                
+
                 final_result = {"screensize":pickedscreensize}
                 return final_result
         return {}
     def getUsers_color(self):
-        # THIS FUNCTION NEEDS TO CHECK ALL PARAMS!!!!!
-        
-        
-        
-        #need to cycle through all of the groupboxes
-        
         for x in self.radio_color:
-            if x.isChecked():
-                
+            if x.isChecked():     
                 #works, stores a text of the processor
-                pickedscolor = x.text()
-                
-                
+                pickedscolor = x.text()    
                 #this function is filtering by providing the processor inside of the application
                 #filterby_color(self.warhouseitems, pickedscolor)
-                print(f"Filtering {pickedscolor}")
                 final_result = {"color":pickedscolor}
                 return final_result
         return {}
       
     def getUsers_type_of_storage(self):
         for x in self.radio_storage:
-            if x.isChecked():
-                
-                #works, stores a text of the processor
-                pickedstorage = x.text()
-                
-                
-                #this function is filtering by providing the processor inside of the application
-                #filterby_storagetype(self.warhouseitems, pickedstorage)
-                print(f"Filtering {pickedstorage}")
+            if x.isChecked():             
+                pickedstorage = x.text()   
                 final_result = {"storage_type":pickedstorage}
                 return final_result
         return {}
@@ -451,15 +416,15 @@ class firstApp(Ui_MainWindow):
         self.window.show()
         
     def add_to_cart(self,item):
-        print("hhhhhhhhhhhh")
-        print(item.processor)
+   
+        
         try:
             newUser.assignbasket(current_basket)
         except:
             
             stock_user.assignbasket(current_basket)
         current_basket.additem(item)
-        print(current_basket.items)
+        print("Added to cart")
             
     def hook_item_functions(self,widgets,_items):
         counting = 0
