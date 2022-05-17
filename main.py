@@ -173,13 +173,10 @@ from items import Scrolling
 import sys
 
 import database
-
+from checkout import Checkout_window
 class firstApp(Ui_MainWindow):
     
-    def __init__(self,window):
-        
-       
-        
+    def __init__(self,window):      
         self.setupUi(window)
         #this line connect the button called filter_button with a local function ShowMe
         self.filter_button.clicked.connect(self.getUsers_processor)
@@ -187,50 +184,17 @@ class firstApp(Ui_MainWindow):
         self.filter_button.clicked.connect(self.getUsers_color)
         self.filter_button.clicked.connect(self.getUsers_type_of_storage)
         self.filter_button.clicked.connect(self.mainfilter)
-    
-        
         
         self.login_button.clicked.connect(self.openregistration)
         
+        self.shopping_button.clicked.connect(lambda:self.opencheckout(current_basket))
         
+ 
+        self.radio_procesors = [self.Intel_9,self.Intel_7,self.Intel_5,self.Intel_3,self.AMD5,self.AMD7,self.AMD9]
+        self.radio_screensizes = [self.smallest,self.lowermid,self.mid,self.uppermid,self.largest]
+        self.radio_color = [self.c_black,self.c_silver,self.c_white,self.c_gray]  
+        self.radio_storage = [self.storage_ssd,self.storage_HDD]
     
-    
-    
-    
-        #OPted for my own group boxes
-        #Processors
-        self.radio_procesors = []
-        self.radio_procesors.append(self.Intel_9)
-        self.radio_procesors.append(self.Intel_7)
-        self.radio_procesors.append(self.Intel_5)
-        self.radio_procesors.append(self.Intel_3)
-        
-        self.radio_procesors.append(self.AMD9)
-        self.radio_procesors.append(self.AMD7)
-        self.radio_procesors.append(self.AMD5)
-        
-        
-        #Screensizes
-        self.radio_screensizes = []
-        self.radio_screensizes.append(self.smallest)
-        self.radio_screensizes.append(self.lowermid)
-        self.radio_screensizes.append(self.mid)
-        self.radio_screensizes.append(self.uppermid)
-        self.radio_screensizes.append(self.largest)
-        
-        self.radio_color = []
-        self.radio_color.append(self.c_black)
-        self.radio_color.append(self.c_silver)
-        self.radio_color.append(self.c_white)
-        self.radio_color.append(self.c_gray)
-        
-        self.radio_storage = []
-        self.radio_storage.append(self.storage_ssd)
-        self.radio_storage.append(self.storage_HDD)
-        
-        self.warhouseitems = []
-
-
 
     
         produkt1 = Product(
@@ -279,22 +243,8 @@ class firstApp(Ui_MainWindow):
             "Produkt 5", "ASUS", 2, "14.8", "time", "AMD Ryzen 7", "HDD", "Gray", "helloo"
         )
 
-        self.warhouseitems.append(produkt1)
-        self.warhouseitems.append(produkt2)
-        self.warhouseitems.append(produkt3)
-        self.warhouseitems.append(produkt4)
-        self.warhouseitems.append(produkt5)
-        self.warhouseitems.append(produkt6)
-        self.warhouseitems.append(produkt7)
-        self.warhouseitems.append(produkt8)
-        self.warhouseitems.append(produkt9)
-        self.warhouseitems.append(produkt10)
-        self.warhouseitems.append(produkt11)
-        self.warhouseitems.append(produkt12)
-        self.warhouseitems.append(produkt13)
-        self.warhouseitems.append(produkt14)
-        self.warhouseitems.append(produkt15)
-                
+        self.warhouseitems = [produkt1,produkt2,produkt3,produkt4,produkt5,produkt6,produkt7,produkt8,produkt9,produkt10,produkt11,produkt12,produkt13,produkt14,produkt15]
+
     def openregistration(self):
      
         self.window = QtWidgets.QMainWindow()
@@ -304,6 +254,21 @@ class firstApp(Ui_MainWindow):
         self.ui.proceed_button.clicked.connect(self.checking)
         
         
+    def opencheckout(self,basket):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Checkout_window()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        for x in basket.items:
+            self.ui.comboBox.addItem(x.name)
+        
+        self.ui.total_price_text.setText(str(basket.calculate_total_value()))
+        self.ui.pay_button.clicked.connect(ui.pay)
+        
+        
+    def pay(self):
+        #maybe write something into another database
+        print("payed")
         
     def checking(self):
         entry_name = self.ui.name_entry.text()
