@@ -15,11 +15,10 @@ from user import User
 import re
 
 
-
+# validation of the inputs from registration
 def validation(name, email_address, password):
     correctness = 1
     if not name.isalpha():
-        # need some message that the process is starting once again
         correctness = 0
     email_regex = re.compile(
         r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+"
@@ -38,25 +37,17 @@ def validation(name, email_address, password):
     
 
 
-#registration()
-
 
 def filterby_proccesor(warehouse, users_choice):
-
-    """ processorAMD_5 = []
-    processorAMD_7 = []
-    processorAMD_9 = []
-
-    processorIntel_3 = []
-    processorIntel_5 = []
-    processorIntel_7 = []
-    processorIntel_9 = []
-     """
-    
+    """ 
+    warehouse: List of all items
+    users_choice: value of a function "getUsers_processor()"
+                : type(dictionary) 
+                : {"processor",processor_value}
+    """
     final = []
-    #this actually might be the final solution
     for x in warehouse:
-        
+        #checking if the choice is empty
         if users_choice == {}:
             return final
         if x.processor == users_choice["processor"]:
@@ -71,8 +62,14 @@ def filterby_proccesor(warehouse, users_choice):
         return final
 
 def filterby_screensize(warehouse,users_choice): 
-
-
+    """ 
+    warehouse: List of all items
+    users_choice: value of a function "getUsers_screensize()"
+                : type(dictionary) 
+                : {"screensize",screensize_value}
+    """
+    
+    # Categories of the screens
     smallest = []
     lowmid = []
     mid = []
@@ -81,6 +78,7 @@ def filterby_screensize(warehouse,users_choice):
     
     
     final = []
+    #for loop that asssigns products to categories
     for x in warehouse:
         
         if float(x.screensize) < 11:
@@ -98,41 +96,35 @@ def filterby_screensize(warehouse,users_choice):
         if float(x.screensize) > 17.3:       
             high.append(x)
 
-    
-    if users_choice == {'screensize': "x<11"}:
-        
+    #manager of returning the correct type
+    if users_choice == {'screensize': "x<11"}:     
         return smallest
-    if users_choice == {'screensize': '11\'\'≥x<14"'}:
-        
+    
+    if users_choice == {'screensize': '11\'\'≥x<14"'}:      
         return lowmid
+    
     if users_choice =={'screensize':  '14"≥x<15.6"'}:
-    
         return mid
-    if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:
-      
-        return high_mid
-    if users_choice == {'screensize': 'x≥17.3"'}:
     
+    if users_choice =={'screensize':  '15.6\'\'≥x<17.3"'}:  
+        return high_mid
+    
+    if users_choice == {'screensize': 'x≥17.3"'}:
         return high
-
-   
-            
-    #this actually might be the final solution
-    for x in warehouse:
-        
-        if users_choice == {}:
-            return final
-        if x.screensize == users_choice["screensize"]:
-            final.append(x)
-        else:
-            pass
+    
+    if users_choice == {}:
+        return final
+    
   
-    if len(final) == 0:
-        return final
-    else:
-        return final
+    
 
 def filterby_color(warehouse,users_choice): 
+    """ 
+    warehouse: List of all items
+    users_choice: value of a function "getUsers_color()"
+                : type(dictionary) 
+                : {"color",color_value}
+    """
     
     final = []
 
@@ -142,6 +134,7 @@ def filterby_color(warehouse,users_choice):
         if x.color == users_choice["color"]:
             final.append(x)
 
+    #error handling
     if len(final) == 0:
         return final
     else:
@@ -150,17 +143,23 @@ def filterby_color(warehouse,users_choice):
 
 
 def filterby_storagetype(warehouse, users_choice):
+    """ 
+    warehouse: List of all items
+    users_choice: value of a function "getUsers_type_of_storage"
+                : type(dictionary) 
+                : {"storage_type",storage_value}
+    """
     final = []
     #this actually might be the final solution
     for x in warehouse:
-        
         if users_choice == {}:
             return final
         if x.storage_type == users_choice["storage_type"]:
             final.append(x)
         else:
             pass
- 
+        
+    # Error handling
     if len(final) == 0:
         return final
     else:
@@ -174,11 +173,19 @@ import sys
 
 import database
 from checkout import Checkout_window
+from warehouse_products import *
+
 class firstApp(Ui_MainWindow):
+    """ 
+    Instance of a class firstApp
+    """
     
     def __init__(self,window):      
         self.setupUi(window)
-        #this line connect the button called filter_button with a local function ShowMe
+        """ 
+        Connecting the main buttons to the respective functions
+        
+        """
         self.filter_button.clicked.connect(self.getUsers_processor)
         self.filter_button.clicked.connect(self.getUsers_sizes)
         self.filter_button.clicked.connect(self.getUsers_color)
@@ -189,7 +196,9 @@ class firstApp(Ui_MainWindow):
         
         self.shopping_button.clicked.connect(lambda:self.opencheckout(current_basket))
         
- 
+        """
+        Creation of parameters and assigning the various inputs 
+        """
         self.radio_procesors = [self.Intel_9,self.Intel_7,self.Intel_5,self.Intel_3,self.AMD5,self.AMD7,self.AMD9]
         self.radio_screensizes = [self.smallest,self.lowermid,self.mid,self.uppermid,self.largest]
         self.radio_color = [self.c_black,self.c_silver,self.c_white,self.c_gray]  
@@ -197,55 +206,16 @@ class firstApp(Ui_MainWindow):
     
 
     
-        produkt1 = Product(
-            "Produkt 1", "ASUS", 2, "12", "time", "Intel Core i7", "SSD", "Black", "helloo"
-        )
-        produkt2 = Product(
-            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Gray", "helloo"
-        )
-        produkt3 = Product(
-            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i5", "HDD", "Gray", "helloo"
-        )
-        produkt4 = Product(
-            "Produkt 4", "ACER ", 8, "11", "time", "Intel Core i3", "SSD", "Silver", "helloo"
-        )
-        produkt5 = Product(
-            "Produkt 5", "ASUS", 2, "12", "time", "AMD Ryzen 9", "SSD", "White", "helloo"
-        )
-        produkt6 = Product(
-            "Produkt 1", "ASUS", 2, "15", "time", "Intel Core i3", "SSD", "Black", "helloo"
-        )
-        produkt7 = Product(
-            "Produkt 2", "LENOVO", 2, "15.6", "time", "AMD Ryzen 9", "SSD", "Black", "helloo"
-        )
-        produkt8 = Product(
-            "Produkt 3", "MAC", 4, "20", "time", "Intel Core i9", "HDD", "White", "helloo"
-        )
-        produkt9 = Product(
-            "Produkt 4", "ACER ", 8, "17", "time", "Intel Core i3", "HDD", "Silver", "helloo"
-        )
-        produkt10 = Product(
-            "Produkt 5", "ASUS", 2, "10", "time", "AMD Ryzen 5", "SSD", "Gray", "helloo"
-        )
-        produkt11 = Product(
-            "Produkt 1", "ASUS", 2, "14", "time", "AMD Ryzen 5", "SSD", "Gray", "helloo"
-        )
-        produkt12 = Product(
-            "Produkt 2", "LENOVO", 2, "13.6", "time", "AMD Ryzen 7", "SSD", "Black", "helloo"
-        )
-        produkt13 = Product(
-            "Produkt 3", "MAC", 4, "16", "time", "Intel Core i5", "HDD", "White", "helloo"
-        )
-        produkt14 = Product(
-            "Produkt 4", "ACER ", 8, "14.5", "time", "Intel Core i5", "HDD", "Silver", "helloo"
-        )
-        produkt15 = Product(
-            "Produkt 5", "ASUS", 2, "14.8", "time", "AMD Ryzen 7", "HDD", "Gray", "helloo"
-        )
-
-        self.warhouseitems = [produkt1,produkt2,produkt3,produkt4,produkt5,produkt6,produkt7,produkt8,produkt9,produkt10,produkt11,produkt12,produkt13,produkt14,produkt15]
+        
+        """
+        the variable warhouseitems is being passed passed from a foreign file <warehouseproducts.py"
+        """
+        self.warhouseitems = allitems
 
     def openregistration(self):
+        """
+        Function is responsible for opening a new window whenever user decides to register 
+        """
      
         self.window = QtWidgets.QMainWindow()
         self.ui = Registration_Ui()
@@ -254,11 +224,17 @@ class firstApp(Ui_MainWindow):
         self.ui.proceed_button.clicked.connect(self.checking)
         
         
-    def opencheckout(self,basket):
+    def opencheckout(self,basket):    
+        """
+        basket: instance of object Basket
+              : type(basket.items) = dictionary 
+        Function is responsible for opening a paying window 
+        """
         self.window = QtWidgets.QMainWindow()
         self.ui = Checkout_window()
         self.ui.setupUi(self.window)
         self.window.show()
+        #adding every item in the basket to a combo box for a review
         for x in basket.items:
             self.ui.comboBox.addItem(x.name)
         
@@ -270,7 +246,13 @@ class firstApp(Ui_MainWindow):
         #maybe write something into another database
         print("payed")
         
+        
+        
     def checking(self):
+        
+        """
+        Function is responsible for a final checking before writing into a database 
+        """
         entry_name = self.ui.name_entry.text()
         entry_email = self.ui.email_entry.text()
         entry_password = self.ui.password_entry.text()
@@ -280,6 +262,7 @@ class firstApp(Ui_MainWindow):
             if database.controlling(entry_email) == "Not":    
                 global newUser
                 newUser = User(entry_name,entry_email,entry_password,18)
+                #writing into a database
                 database.registering(newUser)
                 print("User registered")
                 self.window.hide()
@@ -289,12 +272,6 @@ class firstApp(Ui_MainWindow):
                 self.ui.email_entry.setText("User with this email adress already exists")
                 self.ui.password_entry.setText("User with this email adress already exists")
                 
-                #check if user exists, if not than write to database
-            
-            #how to check if there is something in the database
-            
-            
-            
             
         else:
             self.ui.name_entry.setText("")
@@ -304,44 +281,59 @@ class firstApp(Ui_MainWindow):
     
         
     
-    
     def getUsers_processor(self):
+        """ 
+        Function responsible for looping through entry boxes and gathering the final output
+        return: final_result
+              : type(final_result) = dictionary
+              : {"processor",pickedprocessor}
+        """
+    
         for x in self.radio_procesors:
-            if x.isChecked():               
-                #works, stores a text of the processor
-                pickedprocessor = x.text()       
-                #this function is filtering by providing the processor inside of the application
-                #filterby_proccesor(self.warhouseitems, pickedprocessor)
-
+            if x.isChecked():                              
+                pickedprocessor = x.text()      
                 final_result = {"processor":pickedprocessor}
                 return final_result
         return {}
                
                 
     def getUsers_sizes(self):
+        """ 
+        Function responsible for looping through entry boxes and gathering the final output
+        return: final_result
+              : type(final_result) = dictionary
+              : {"screensize",pickedscreensize}
+        """
+    
         for x in self.radio_screensizes:
             if x.isChecked():  
-                #works, stores a text of the processor
                 pickedscreensize = x.text()
-                            
-                #this function is filtering by providing the processor inside of the application
-                #filterby_screensize(self.warhouseitems, pickedscreensize)
-
                 final_result = {"screensize":pickedscreensize}
                 return final_result
         return {}
     def getUsers_color(self):
+        """ 
+        Function responsible for looping through entry boxes and gathering the final output
+        return: final_result
+              : type(final_result) = dictionary
+              : {"color",pickedcolor}
+        """
+    
         for x in self.radio_color:
             if x.isChecked():     
-                #works, stores a text of the processor
                 pickedscolor = x.text()    
-                #this function is filtering by providing the processor inside of the application
-                #filterby_color(self.warhouseitems, pickedscolor)
                 final_result = {"color":pickedscolor}
                 return final_result
         return {}
       
     def getUsers_type_of_storage(self):
+        """ 
+        Function responsible for looping through entry boxes and gathering the final output
+        return: final_result
+              : type(final_result) = dictionary
+              : {"storage_type",pickedstorage}
+        """
+        
         for x in self.radio_storage:
             if x.isChecked():             
                 pickedstorage = x.text()   
@@ -354,26 +346,26 @@ class firstApp(Ui_MainWindow):
         
     #popping up a new window          
     def View_more(self,items,pos):
+        """ 
+        Function that is activated when a user decides to inspect an item
+        items: dictionary of all filtered items
+             : {index,[item]}
+        pos: position of the item we are selecting (integer) 
+        
+        """
+        
+        
         
         item = items[pos][0]
-        
         self.window = QtWidgets.QMainWindow()
-        self.ui = View_Item_UI()
-       
+        self.ui = View_Item_UI()   
         self.ui.setupUi(self.window)
-        self.ui.button_add_to_cart.clicked.connect(lambda: ui.add_to_cart(item))
-        
-
-      
-       
-        ############## Right now iam passing all of the filtered items
-        ############## Need to find a way how to assign eahc of them to the button
-        ############## Probably inside here
-        
+        self.ui.button_add_to_cart.clicked.connect(lambda: ui.add_to_cart(item))     
         _translate = QtCore.QCoreApplication.translate
+        #specifiing the paramaters passed from the item
         self.ui.label_Color.setText(_translate("MainWindow", item.color))
         self.ui.label_Name.setText(_translate("MainWindow", item.name))
-        #self.ui.label_price.setText(_translate("MainWindow", items[position].price))
+        self.ui.label_price.setText(_translate("MainWindow", str(item.price)))
         self.ui.label_processor.setText(_translate("MainWindow", item.processor))
         self.ui.label_storage.setText(_translate("MainWindow", item.storage_type))
         self.ui.label_about.setText(_translate("MainWindow", item.description))
@@ -381,7 +373,10 @@ class firstApp(Ui_MainWindow):
         self.window.show()
         
     def add_to_cart(self,item):
-   
+        """ 
+        Function that is putting an item into the basket
+        item: instance of an object Product
+        """
         
         try:
             newUser.assignbasket(current_basket)
@@ -392,9 +387,16 @@ class firstApp(Ui_MainWindow):
         print("Added to cart")
             
     def hook_item_functions(self,widgets,_items):
+        """
+        Function that is responsible to correctly assigning the function View_more
+        I have chosen this approach because the function View_more must work differently for each
+        product. Iam using the lambda function in order to be able to pass parameters 
+        widgets: consist of all the elements that are going to be displayed
+        _items: items that have been filtered
+        """
+        
         counting = 0
         
-    
         
         for x in range(len(widgets.button_list)):
             if counting< len(_items):
@@ -402,6 +404,8 @@ class firstApp(Ui_MainWindow):
                 counting += 1
 
         counter = 0
+        #assigning names to labels that have been filtered
+        #I have opted for the most important parameters of a computer
         for x in widgets.Labellist:
             
             x.setText(f"Name: {_items[counter][0].name}, Brand: {_items[counter][0].brand}, Price: {_items[counter][0].processor}")
@@ -451,6 +455,7 @@ class firstApp(Ui_MainWindow):
 
         
         filtered_elements = []
+        #final products is a list of items to which iam going to be appending correctly filtered items
         final_products = []
         all = set(all)
         for x in all:
@@ -494,23 +499,34 @@ class firstApp(Ui_MainWindow):
                 if my_Category == fav_size.get("screensize"):
                     filtered_elements.append(x)
                     
-            
+            #appending process
+            #The program is controlling and checking all of the paramets have been fullfilled
             if (fav_color == {} or fav_color.get("color") == x.color) and  (fav_processor == {} or fav_processor.get("processor") == x.processor) and (fav_storage == {} or fav_storage.get("storage_type") == x.storage_type)  and (my_Category == {} or my_Category==fav_size.get("screensize")):
                 final_products.append(x)
         print(final_products)
         print("\n")
         
-   
+        #activating the function View_items that opens a window with all the filtered items
         self.View_items(final_products)
         return final_products
 
     def View_items(self,_items):
+        """
+        Function View_items is responsible for displaying a filtered items
+        _items: is a list hold the items
+        """
         self.window = QtWidgets.QMainWindow()
         self.scroll = Scrolling(_items)
         
+        
+        """ 
+        items_dic: is a dictionary hold the items
+              : {index,[item]} """
         items_dic = {}
         for x in range(len(_items)):
             items_dic[x] = [_items[x]] 
+            
+        #after conversion to a dictionary we are activating the function hook_item_functions() that assigns the buttons to a function
         ui.hook_item_functions(self.scroll,items_dic)
        
 

@@ -13,7 +13,7 @@ class Scrolling(QWidget):
         
         
         
-        self.setWindowIcon(QtGui.QIcon(self.iconName))
+      
         self.setGeometry(self.left,self.top,self.width_,self.height_)
         
         
