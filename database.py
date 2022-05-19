@@ -38,7 +38,37 @@ def registering(user):
     con.close()
     
     
+def login(email,password):
+    con = psycopg2.connect(
+    host = 'localhost',
+    database='GreatBuy',
+    user = 'postgres',
+    password = 'postgres',
 
+    
+    )
+
+    password = f'\'{password}\''
+    email = f'\'{email}\''
+
+    insert_sql_query = f'''
+
+    SELECT * FROM UserData WHERE EMAIL = {email} and PASSWORD = {password};
+
+
+    '''
+    
+    pointer = con.cursor()
+    pointer.execute(insert_sql_query)
+    user_data = pointer.fetchall()
+
+    
+    
+    
+
+    
+
+    return user_data
 def controlling(email):
     con = psycopg2.connect(
     host = 'localhost',

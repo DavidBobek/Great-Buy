@@ -8,6 +8,7 @@ from typing import final
 from unittest import result
 
 from numpy import append
+from sympy import false
 from View_Item import View_Item_UI
 from product import Product
 from product import Basket
@@ -174,7 +175,7 @@ import sys
 import database
 from checkout import Checkout_window
 from warehouse_products import *
-
+from login import login_ui
 class firstApp(Ui_MainWindow):
     """ 
     Instance of a class firstApp
@@ -193,9 +194,11 @@ class firstApp(Ui_MainWindow):
         self.filter_button.clicked.connect(self.mainfilter)
         
         self.login_button.clicked.connect(self.openregistration)
+        self.register_button.clicked.connect(self.openlogin)
         
         self.shopping_button.clicked.connect(lambda:self.opencheckout(current_basket))
         
+        self.clear_button.clicked.connect(self.clear_inputs)
         """
         Creation of parameters and assigning the various inputs 
         """
@@ -224,6 +227,18 @@ class firstApp(Ui_MainWindow):
         self.ui.proceed_button.clicked.connect(self.checking)
         
         
+    def openlogin(self):
+        """
+        Function is responsible for opening a new window whenever user decides to login 
+        """
+     
+        self.window = QtWidgets.QMainWindow()
+        self.ui = login_ui()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.proceed_button.clicked.connect(self.login)
+        
+        
     def opencheckout(self,basket):    
         """
         basket: instance of object Basket
@@ -240,6 +255,25 @@ class firstApp(Ui_MainWindow):
         
         self.ui.total_price_text.setText(str(basket.calculate_total_value()))
         self.ui.pay_button.clicked.connect(ui.pay)
+        
+        
+    def login(self):
+ 
+        email = self.ui.email_entry.text()
+        password = self.ui.password_entry.text()
+        
+        data = database.login(email,password)
+        
+        if data == []:
+            self.ui.email_entry.setText("")
+            self.ui.password_entry.setText("")
+            
+        else:
+            print("The user has logged in")
+            
+            
+    
+    
         
         
     def pay(self):
@@ -341,8 +375,20 @@ class firstApp(Ui_MainWindow):
                 return final_result
         return {}
         
+    def clear_inputs(self):
+        all_inputs = self.radio_color+self.radio_procesors+self.radio_screensizes+self.radio_storage
+        active = []
         
-        
+        for x in all_inputs:
+            if x.isChecked():
+                active.append(x)
+                
+        for x in active:
+            x.setChecked(False)
+                
+                
+        print(active) 
+    
         
     #popping up a new window          
     def View_more(self,items,pos):
@@ -435,19 +481,19 @@ class firstApp(Ui_MainWindow):
         #checking which parameters are being filtered
         Not_null_params = []
         
-        if len(storage_pick) > 0:
+        if storage_pick:
             Not_null_params.append("storage_type")
             
         
-        if len(color_pick) > 0:
+        if color_pick:
             Not_null_params.append("color")
             
         
-        if len(processor_pick) > 0:
+        if processor_pick:
             Not_null_params.append("processor")
             
         
-        if len(screensize_pick) > 0:
+        if screensize_pick:
             Not_null_params.append("screensize")
             
 
