@@ -144,10 +144,10 @@ class Ui_MainWindow(object):
         self.verticalLayoutWidget_5.setObjectName("verticalLayoutWidget_5")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.BUTTON_login_in = QtWidgets.QPushButton(self.centralwidget)
-        self.BUTTON_login_in.setGeometry(QtCore.QRect(100, 0, 75, 23))
-        self.BUTTON_login_in.setStyleSheet("background-color:rgb(132, 255, 94)")
-        self.BUTTON_login_in.setObjectName("BUTTON_login_in")
+        self.register_button = QtWidgets.QPushButton(self.centralwidget)
+        self.register_button.setGeometry(QtCore.QRect(100, 0, 75, 23))
+        self.register_button.setStyleSheet("background-color:rgb(132, 255, 94)")
+        self.register_button.setObjectName("register_button")
         self.clear_button = QtWidgets.QPushButton(self.centralwidget)
         self.clear_button.setGeometry(QtCore.QRect(10, 40, 75, 23))
         self.clear_button.setStyleSheet("background-color:rgb(132, 255, 94)")
@@ -196,7 +196,7 @@ class Ui_MainWindow(object):
         self.Inspectbutton.setText(_translate("MainWindow", "Inspect"))
         self.label_Name.setText(_translate("MainWindow", "TextLabel"))
         self.Image.setText(_translate("MainWindow", "TextLabel")) """
-        self.BUTTON_login_in.setText(_translate("MainWindow", "Log in"))
+        self.register_button.setText(_translate("MainWindow", "Log in"))
         self.clear_button.setText(_translate("MainWindow", "Clear"))
 
 
