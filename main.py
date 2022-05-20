@@ -31,6 +31,7 @@ def validation(name, email_address, password):
     if not re.fullmatch(r"[A-Za-z0-9@#$%^&+=]{8,}", password):
         correctness = 0
 
+
     if correctness ==1:
         return "Valid"
     else:
@@ -294,7 +295,7 @@ class firstApp(Ui_MainWindow):
         entry_password = self.ui.password_entry.text()
         
         
-        if validation(entry_name,entry_email,entry_password) == "Valid":
+        if validation(entry_name,entry_email,entry_password) == "Valid" and self.ui.age_check.isChecked():
             if database.controlling(entry_email) == "Not":    
                 global newUser
                 newUser = User(entry_name,entry_email,entry_password)
@@ -302,6 +303,8 @@ class firstApp(Ui_MainWindow):
                 database.registering(newUser)
                 print("User registered")
                 self.window.hide()
+                
+            
                 
             else:
                 self.ui.name_entry.setText("User with this email adress already exists")
