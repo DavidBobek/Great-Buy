@@ -1,3 +1,4 @@
+from turtle import screensize
 from product import Product
 produkt1 = Product(
     "Produkt 1", "ASUS", 2, "12", "time", "Intel Core i7", "SSD", "Black", "helloo"
@@ -60,7 +61,7 @@ produkt19 = Product(
 produkt20 = Product(
     "Produkt 5", "ASUS", 2, "16.8", "time", "AMD Ryzen 7", "SSD", "Gray", "helloo"
 )
-produkt21 = Product(
+produkt21 = Product( 
     "Produkt 5", "ASUS", 2, "18.8", "time", "AMD Ryzen 7", "SSD", "Gray", "helloo"
 )
 """ import random
@@ -77,10 +78,40 @@ radio_storage = [
 storage_ssd,
 storage_HDD]
 for x in range(1,100): """
+  
+import random  
+import time
+
+"Produkt 4", "ACER ", 8, "14.5", "time", "Intel Core i5", "HDD", "Silver", "helloo"
+processors= ["AMD Ryzen 9","AMD Ryzen 7","AMD Ryzen 5","Intel Core i9","Intel Core i7","Intel Core i5","Intel Core i3"]
+colors = ["Silver","Black","White","Gray"]
+storages = ["SSD","HDD"]
+brands = ["ASUS","LENOVO","ACER","HP"]
+
+prods = []
+
+for x in range(10000):
+    name = f"Product {x}"
+    brand = random.choice(brands)
+    processor = random.choice(processors)
+    color = random.choice(colors)
+    storage = random.choice(storages)
+    price = random.randrange(700,1200)
+    screen = random.randrange(10,20)
+    curr_time = time.localtime()
+    description = f"This is a great product!"
+    
+    product = Product(name,brand,price,str(screen),curr_time,processor,storage,color,description)
+    
+    prods.append(product)
     
     
-
-
+    
+print(prods)
+    
 global allitems
 allitems = [produkt1,produkt2,produkt3,produkt4,produkt5,produkt6,produkt7,produkt8,produkt9,produkt10
         ,produkt11,produkt12,produkt13,produkt14,produkt15,produkt16,produkt17,produkt18,produkt19,produkt20,produkt21]
+
+allitems = allitems+prods
+print(allitems)

@@ -598,7 +598,7 @@ start = 0
 while start == 0:
     start = 2
     
-    stock_user = User("defualt","default@mail.com","adminADMIN1",20)
+    stock_user = User("defualt","default@mail.com","adminADMIN1")
     current_basket = Basket()
         
     app = QtWidgets.QApplication(sys.argv)
