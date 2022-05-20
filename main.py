@@ -269,7 +269,9 @@ class firstApp(Ui_MainWindow):
             self.ui.password_entry.setText("")
             
         else:
+            data = data[0]
             print("The user has logged in")
+            newUser = User(id=data[0],password=data[1],email=data[2],name=data[3])
             
             
     
@@ -295,7 +297,7 @@ class firstApp(Ui_MainWindow):
         if validation(entry_name,entry_email,entry_password) == "Valid":
             if database.controlling(entry_email) == "Not":    
                 global newUser
-                newUser = User(entry_name,entry_email,entry_password,18)
+                newUser = User(entry_name,entry_email,entry_password)
                 #writing into a database
                 database.registering(newUser)
                 print("User registered")

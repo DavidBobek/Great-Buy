@@ -18,6 +18,7 @@ sql_query='''
         USER_ID TEXT PRIMARY KEY NOT NULL,
         PASSWORD TEXT,
         EMAIL TEXT
+        NAME TEXT
         
         
     ); 

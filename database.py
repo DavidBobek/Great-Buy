@@ -1,4 +1,5 @@
 
+from unicodedata import name
 import psycopg2
 
 
@@ -18,11 +19,12 @@ def registering(user):
     )
     _id = f'\'{user.id}\''
     password = f'\'{user.password}\''
+    name = f'\'{user.name}\''
     email = f'\'{user.email}\''
 
     insert_sql_query = f'''
 
-    INSERT INTO UserData(USER_ID,PASSWORD,EMAIL)VALUES ({_id}, {password}, {email});;
+    INSERT INTO UserData(USER_ID,PASSWORD,EMAIL,NAME)VALUES ({_id}, {password}, {email}, {name});;
 
 
 
@@ -121,7 +123,5 @@ def deleting():
     con.commit()
     con.close()
     
-#deleting()
-
-
-#registering(davidko)
+#deleting()\
+  
