@@ -1,20 +1,9 @@
-from audioop import reverse
-from cgitb import small
-from concurrent.futures import process
-from heapq import merge
-from pkgutil import iter_modules
-from time import process_time
-from typing import final
-from unittest import result
-
-from numpy import append
-from sympy import false
 from View_Item import View_Item_UI
 from product import Product
 from product import Basket
 from user import User
 import re
-
+import smtplib
 
 # validation of the inputs from registration
 def validation(name, email_address, password):
@@ -199,7 +188,7 @@ class firstApp(Ui_MainWindow):
         
         self.shopping_button.clicked.connect(lambda:self.opencheckout(current_basket))
         
-        self.clear_button.clicked.connect(self.clear_inputs)
+
         """
         Creation of parameters and assigning the various inputs 
         """
@@ -259,6 +248,9 @@ class firstApp(Ui_MainWindow):
         
         
     def login(self):
+        """
+        whenever a user decides to login he/she is presented
+        """
  
         email = self.ui.email_entry.text()
         password = self.ui.password_entry.text()
@@ -278,11 +270,18 @@ class firstApp(Ui_MainWindow):
     
     
         
-        
+
+
+
     def pay(self):
         #maybe write something into another database
+        newUser
         print("payed")
-        
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login('greatbuyeshop@gmail.com', 'TheGreatBuy1')
+
+        server.sendmail('greatbuyeshop@gmail.com',newUser.email,
+                        f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')        
         
         
     def checking(self):
@@ -380,20 +379,7 @@ class firstApp(Ui_MainWindow):
                 return final_result
         return {}
         
-    def clear_inputs(self):
-        all_inputs = self.radio_color+self.radio_procesors+self.radio_screensizes+self.radio_storage
-        active = []
-        
-        for x in all_inputs:
-            if x.isChecked():
-                active.append(x)
-                
-        for x in active:
-            x.setChecked(False)
-                
-                
-        print(active) 
-    
+
         
     #popping up a new window          
     def View_more(self,items,pos):

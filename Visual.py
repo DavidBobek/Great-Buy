@@ -148,10 +148,6 @@ class Ui_MainWindow(object):
         self.register_button.setGeometry(QtCore.QRect(100, 0, 75, 23))
         self.register_button.setStyleSheet("background-color:rgb(132, 255, 94)")
         self.register_button.setObjectName("register_button")
-        self.clear_button = QtWidgets.QPushButton(self.centralwidget)
-        self.clear_button.setGeometry(QtCore.QRect(10, 40, 75, 23))
-        self.clear_button.setStyleSheet("background-color:rgb(132, 255, 94)")
-        self.clear_button.setObjectName("clear_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1122, 21))
@@ -197,7 +193,7 @@ class Ui_MainWindow(object):
         self.label_Name.setText(_translate("MainWindow", "TextLabel"))
         self.Image.setText(_translate("MainWindow", "TextLabel")) """
         self.register_button.setText(_translate("MainWindow", "Log in"))
-        self.clear_button.setText(_translate("MainWindow", "Clear"))
+
 
 
 

@@ -23,7 +23,7 @@ class Checkout_window(object):
         self.pay_button.setStyleSheet("background-color: rgb(132, 255, 94);")
         self.pay_button.setObjectName("pay_button")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(230, 130, 73, 22))
+        self.comboBox.setGeometry(QtCore.QRect(230, 130, 100, 22))
         self.comboBox.setStyleSheet("background-color: rgb(255, 255, 255)")
         self.comboBox.setObjectName("comboBox")
         self.Items_label = QtWidgets.QLabel(self.centralwidget)

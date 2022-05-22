@@ -107,11 +107,8 @@ for x in range(10000):
     
     
     
-print(prods)
-    
+
 global allitems
-allitems = [produkt1,produkt2,produkt3,produkt4,produkt5,produkt6,produkt7,produkt8,produkt9,produkt10
-        ,produkt11,produkt12,produkt13,produkt14,produkt15,produkt16,produkt17,produkt18,produkt19,produkt20,produkt21]
+allitems = []
 
 allitems = allitems+prods
-print(allitems)
