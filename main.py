@@ -264,26 +264,33 @@ class firstApp(Ui_MainWindow):
         else:
             data = data[0]
             print("The user has logged in")
+            global newUser
             newUser = User(id=data[0],password=data[1],email=data[2],name=data[3])
-            
+            self.window.hide()
             
     
     
         
-
+    
 
 
     def pay(self):
         #maybe write something into another database
-        newUser
+        
         print("payed")
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login('greatbuyeshop@gmail.com', 'TheGreatBuy1')
-
-        server.sendmail('greatbuyeshop@gmail.com',newUser.email,
-                        f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')        
         
-        
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            try:
+                
+                server.login('allbuyco2022@gmail.com', 'onxvgueeekrealob')
+                server.sendmail('greatbuyeshop@gmail.com',newUser.email,
+                        f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')   
+       
+            except smtplib.SMTPAuthenticationError as error:
+                print(f'Something is wrong with sender data {error}')     
+            
+            
     def checking(self):
         
         """
