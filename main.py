@@ -88,7 +88,7 @@ def filterby_screensize(warehouse,users_choice):
             high.append(x)
 
     #manager of returning the correct type
-    if users_choice == {'screensize': "x<11"}:     
+    if users_choice == {'screensize': 'x<11"'}:     
         return smallest
     
     if users_choice == {'screensize': '11\'\'≥x<14"'}:      
@@ -182,7 +182,7 @@ class firstApp(Ui_MainWindow):
         self.filter_button.clicked.connect(self.getUsers_color)
         self.filter_button.clicked.connect(self.getUsers_type_of_storage)
         self.filter_button.clicked.connect(self.mainfilter)
-        
+        self.clear_button.clicked.connect(self.clear    )
         self.login_button.clicked.connect(self.openregistration)
         self.register_button.clicked.connect(self.openlogin)
         
@@ -449,7 +449,13 @@ class firstApp(Ui_MainWindow):
             counter += 1
     
 
-    
+    def clear(self):
+        radio_buttons = self.radio_procesors+self.radio_screensizes+self.radio_color+self.radio_storage
+        for x in radio_buttons:
+            if x.isChecked():
+                x.setAutoExclusive(False)
+                x.setChecked(False)
+                x.setAutoExclusive(True)
     def mainfilter(self):
         #gathering the color from the inputs
         fav_color = self.getUsers_color()
@@ -518,7 +524,7 @@ class firstApp(Ui_MainWindow):
                 
                 
                 if float(x.screensize) <11:
-                    my_Category =  "x<11"
+                    my_Category =  'x<11"'
                 
                 if float(x.screensize)>=11 and float(x.screensize)<14:
                     my_Category =  '11\'\'≥x<14"'

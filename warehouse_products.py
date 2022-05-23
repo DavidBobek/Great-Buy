@@ -97,7 +97,7 @@ for x in range(10000):
     color = random.choice(colors)
     storage = random.choice(storages)
     price = random.randrange(700,1200)
-    screen = random.randrange(10,20)
+    screen = random.randrange(9,20)
     curr_time = time.localtime()
     description = f"This is a great product!"
     

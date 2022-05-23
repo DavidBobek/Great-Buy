@@ -118,6 +118,10 @@ class Ui_MainWindow(object):
         self.c_gray = QtWidgets.QRadioButton(self.filter_color_2)
         self.c_gray.setGeometry(QtCore.QRect(10, 80, 82, 17))
         self.c_gray.setObjectName("c_gray")
+        self.clear_button = QtWidgets.QPushButton(self.centralwidget)
+        self.clear_button.setGeometry(QtCore.QRect(10, 40, 75, 23))
+        self.clear_button.setStyleSheet("background-color:rgb(132, 255, 94)")
+        self.clear_button.setObjectName("clear_button")
         self.verticalLayout_3.addWidget(self.filter_color_2)
         self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(10, 500, 160, 80))
@@ -194,7 +198,7 @@ class Ui_MainWindow(object):
         self.Image.setText(_translate("MainWindow", "TextLabel")) """
         self.register_button.setText(_translate("MainWindow", "Log in"))
 
-
+        self.clear_button.setText(_translate("MainWindow", "Clear"))
 
 
 
