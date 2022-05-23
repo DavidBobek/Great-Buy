@@ -553,7 +553,7 @@ class firstApp(Ui_MainWindow):
             #The program is controlling and checking all of the paramets have been fullfilled
             if (fav_color == {} or fav_color.get("color") == x.color) and  (fav_processor == {} or fav_processor.get("processor") == x.processor) and (fav_storage == {} or fav_storage.get("storage_type") == x.storage_type)  and (my_Category == {} or my_Category==fav_size.get("screensize")):
                 final_products.append(x)
-        print(final_products)
+        
         print("\n")
         
         #activating the function View_items that opens a window with all the filtered items
