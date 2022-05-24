@@ -1,9 +1,12 @@
 from View_Item import View_Item_UI
-from product import Product
 from product import Basket
 from user import User
 import re
 import smtplib
+from registration import *
+import sys
+from db_creating import *
+
 
 # validation of the inputs from registration
 def validation(name, email_address, password):
@@ -161,7 +164,6 @@ def filterby_storagetype(warehouse, users_choice):
 from Visual import *
 from items import Scrolling
 import sys
-
 import database
 from checkout import Checkout_window
 from warehouse_products import *
@@ -278,18 +280,21 @@ class firstApp(Ui_MainWindow):
         #maybe write something into another database
         
         print("payed")
-        
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
-            server.starttls()
-            try:
-                
-                server.login('allbuyco2022@gmail.com', 'onxvgueeekrealob')
-                server.sendmail('greatbuyeshop@gmail.com',newUser.email,
-                        f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')   
-       
-            except smtplib.SMTPAuthenticationError as error:
-                print(f'Something is wrong with sender data {error}')     
+        try:
+            newUser
             
+            with smtplib.SMTP('smtp.gmail.com', 587) as server:
+                server.starttls()
+                try:
+                    
+                    server.login('greatbuyeshop@gmail.com', 'GreatBuy1eshop')
+                    server.sendmail('greatbuyeshop@gmail.com',newUser.email,
+                            f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')   
+        
+                except smtplib.SMTPAuthenticationError as error:
+                    print(f'Something is wrong with sender data {error}')     
+        except:
+            self.openregistration()
             
     def checking(self):
         
@@ -585,20 +590,11 @@ class firstApp(Ui_MainWindow):
 
 #instance of the class
 
-from registration import *
-
-
-
-
-""" from PyQt5.QtWidgets import QMessageBox,QApplication,QWidget,QScrollArea,QFormLayout,QLabel,QPushButton,QGroupBox,QVBoxLayout """
-from PyQt5 import QtGui
-import sys
-
-
 
 start = 0
 while start == 0:
     start = 2
+    initialize()
     
     stock_user = User("defualt","default@mail.com","adminADMIN1")
     current_basket = Basket()
