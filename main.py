@@ -457,6 +457,9 @@ class firstApp(Ui_MainWindow):
     
 
     def clear(self):
+        """
+        The function clear gathers all of the radio buttons and unchecks all of them 
+        """
         radio_buttons = self.radio_procesors+self.radio_screensizes+self.radio_color+self.radio_storage
         for x in radio_buttons:
             if x.isChecked():
