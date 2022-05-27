@@ -9,7 +9,7 @@ class Scrolling(QWidget):
         self.top = 200
         self.width_ = 500
         self.height_ = 400
-        self.iconName = 'home.png'
+    
         
         
         
@@ -19,7 +19,7 @@ class Scrolling(QWidget):
         
       
         formLayout = QFormLayout()
-        groupBox = QGroupBox("This is the groupbox")
+        groupBox = QGroupBox("Products to pick from")
         
        
         self.Labellist = []

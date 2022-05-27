@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon, QPixmap
 
 
 class View_Item_UI(object):
@@ -23,8 +24,12 @@ class View_Item_UI(object):
         self.groupBox.setFlat(False)
         self.groupBox.setObjectName("groupBox")
         self.Image = QtWidgets.QLabel(self.groupBox)
-        self.Image.setGeometry(QtCore.QRect(110, 140, 141, 51))
+        self.Image.setGeometry(QtCore.QRect(0, 0, 351, 321))
         self.Image.setObjectName("Image")
+        
+        pixmap = QPixmap('laptop1.jpg')
+        self.Image.setPixmap(pixmap)
+                
         self.label_Name = QtWidgets.QLabel(self.centralwidget)
         self.label_Name.setGeometry(QtCore.QRect(420, 90, 321, 16))
         self.label_Name.setObjectName("label_Name")
@@ -82,7 +87,7 @@ class View_Item_UI(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
        
-        self.Image.setText(_translate("MainWindow", "TextLabel"))
+       
         self.label_Name.setText(_translate("MainWindow", "TextLabel"))
         self.label_about.setText(_translate("MainWindow", "TextLabel"))
         self.text_Color.setText(_translate("MainWindow", "Color"))

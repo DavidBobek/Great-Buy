@@ -279,7 +279,7 @@ class firstApp(Ui_MainWindow):
     def pay(self):
         #maybe write something into another database
         
-        print("payed")
+   
         try:
             newUser
             
@@ -289,7 +289,8 @@ class firstApp(Ui_MainWindow):
                     
                     server.login('greatbuyeshop@gmail.com', 'GreatBuy1eshop')
                     server.sendmail('greatbuyeshop@gmail.com',newUser.email,
-                            f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')   
+                            f'Thank you for buying the products with a value of {current_basket.calculate_total_value()}')
+                    print("payed")   
         
                 except smtplib.SMTPAuthenticationError as error:
                     print(f'Something is wrong with sender data {error}')     
@@ -419,6 +420,7 @@ class firstApp(Ui_MainWindow):
         self.ui.label_storage.setText(_translate("MainWindow", item.storage_type))
         self.ui.label_about.setText(_translate("MainWindow", item.description))
         self.ui.label_screensize.setText(_translate("MainWindow", item.screensize))
+        
         self.window.show()
         
     def add_to_cart(self,item):
