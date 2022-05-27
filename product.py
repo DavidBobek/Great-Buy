@@ -51,16 +51,14 @@ class Basket:
         self.items = []
         self.user = None
 
-    # works
     def additem(self, item):
         self.items.append(item)
 
     def removeitem(self, item):
         self.items.remove(item)
 
-    # COUPON?
 
-    # works
+
     def calculate_total_value(self):
         totalValue = 0
         for x in self.items:

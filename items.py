@@ -9,19 +9,9 @@ class Scrolling(QWidget):
         self.top = 200
         self.width_ = 500
         self.height_ = 400
-    
-        
-        
-        
-      
         self.setGeometry(self.left,self.top,self.width_,self.height_)
-        
-        
-      
         formLayout = QFormLayout()
         groupBox = QGroupBox("Products to pick from")
-        
-       
         self.Labellist = []
         self.button_list = {}
         
@@ -46,5 +36,5 @@ class Scrolling(QWidget):
         self.show()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = Scrolling(20)
+    window = Scrolling()
    
