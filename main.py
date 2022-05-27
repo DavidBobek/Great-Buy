@@ -246,7 +246,7 @@ class firstApp(Ui_MainWindow):
         for x in basket.items:
             self.ui.comboBox.addItem(x.name)
         
-        self.ui.total_price_text.setText(str(basket.calculate_total_value()))
+        self.ui.total_price_text.setText(f'{str(basket.calculate_total_value())} €')
         self.ui.pay_button.clicked.connect(ui.pay)
         
         
@@ -438,7 +438,7 @@ class firstApp(Ui_MainWindow):
         #specifiing the paramaters passed from the item
         self.ui.label_Color.setText(_translate("MainWindow", item.color))
         self.ui.label_Name.setText(_translate("MainWindow", item.name))
-        self.ui.label_price.setText(_translate("MainWindow", str(item.price)))
+        self.ui.label_price.setText(_translate("MainWindow",f' {str(item.price)} €'))
         self.ui.label_processor.setText(_translate("MainWindow", item.processor))
         self.ui.label_storage.setText(_translate("MainWindow", item.storage_type))
         self.ui.label_about.setText(_translate("MainWindow", item.description))
@@ -482,7 +482,7 @@ class firstApp(Ui_MainWindow):
         #I have opted for the most important parameters of a computer
         for x in widgets.Labellist:
             
-            x.setText(f"Name: {_items[counter][0].name}, Brand: {_items[counter][0].brand}, Price: {_items[counter][0].processor}")
+            x.setText(f"Processor: {_items[counter][0].processor}, Brand: {_items[counter][0].brand}, Price: {_items[counter][0].price} €")
             counter += 1
     
 
