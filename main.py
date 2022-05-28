@@ -289,6 +289,7 @@ class firstApp(Ui_MainWindow):
                 try:
                     
                     server.login('greatbuyeshop@gmail.com', 'hufgoexbthpcfhew')
+                    
                     server.sendmail('greatbuyeshop@gmail.com',newUser.email,
                             f'Thank you {newUser.name} for buying the products with a value of {current_basket.calculate_total_value()} euros')
                     print("payed")   
