@@ -10,7 +10,7 @@ brands = ["ASUS","LENOVO","ACER","HP"]
 
 prods = []
 
-for x in range(10000):
+for x in range(2000):
     name = f"Product {x}"
     brand = random.choice(brands)
     processor = random.choice(processors)
