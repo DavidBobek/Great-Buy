@@ -1,4 +1,5 @@
 
+import sqlite3
 from unicodedata import name
 import psycopg2
 
@@ -9,14 +10,10 @@ from user import User
 
 
 def registering(user):
-    con = psycopg2.connect(
-    host = 'localhost',
-    database='GreatBuy',
-    user = 'postgres',
-    password = 'postgres',
-
-    
+    con = sqlite3.connect(
+        'GreatBuy.db'
     )
+    pointer = con.cursor()
     _id = f'\'{user.id}\''
     password = f'\'{user.password}\''
     name = f'\'{user.name}\''
@@ -24,30 +21,26 @@ def registering(user):
 
     insert_sql_query = f'''
 
-    INSERT INTO UserData(USER_ID,PASSWORD,EMAIL,NAME)VALUES ({_id}, {password}, {email}, {name});;
+    INSERT INTO UserData(USER_ID,PASSWORD,EMAIL,NAME)VALUES ({_id}, {password}, {email}, {name});
 
 
 
     '''
     
-    pointer = con.cursor()
+    con.commit()
     pointer.execute(insert_sql_query)
+    
     print("Data inputted")
     
     
 
-    con.commit()
+  
     con.close()
     
     
 def login(email,password):
-    con = psycopg2.connect(
-    host = 'localhost',
-    database='GreatBuy',
-    user = 'postgres',
-    password = 'postgres',
-
-    
+    con = sqlite3.connect(
+        'GreatBuy.db'
     )
 
     password = f'\'{password}\''
@@ -72,11 +65,8 @@ def login(email,password):
 
     return user_data
 def controlling(email):
-    con = psycopg2.connect(
-    host = 'localhost',
-    database='GreatBuy',
-    user = 'postgres',
-    password = 'postgres',
+    con = sqlite3.connect(
+        'GreatBuy.db'
     )
     
     insert_sql_query = '''
@@ -101,11 +91,8 @@ def controlling(email):
     
 
 def deleting():
-    con = psycopg2.connect(
-    host = 'localhost',
-    database='GreatBuy',
-    user = 'postgres',
-    password = 'postgres',
+    con = sqlite3.connect(
+        'GreatBuy.db'
     )
     
     insert_sql_query = '''

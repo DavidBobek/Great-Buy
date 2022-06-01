@@ -9,7 +9,7 @@ class User:
         self.email = email
         self.password = password
         self.basket = None
-        self.sellings = {}
+
   
     def assignbasket(self, basket):
         self.basket = basket

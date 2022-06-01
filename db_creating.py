@@ -1,40 +1,27 @@
 import psycopg2
+
+import os
+import sqlite3
+from sqlite3 import Error
+
+
+
+
+
 def initialize():
-    con = psycopg2.connect(
-        host = 'localhost',
-        database='GreatBuy',
-        user = 'postgres',
-        password = 'postgres',
-
-        
-        
-    )
-
-
-
-    sql_query='''
-
-        CREATE TABLE UserData(
+   if not os.path.exists('GreatBuy.db'):
+        print('Create Database')
+        connection = sqlite3.connect('GreatBuy.db')
+        cursor = connection.cursor()
+        create_workspace = '''  CREATE TABLE UserData(
             USER_ID TEXT PRIMARY KEY NOT NULL,
             PASSWORD TEXT,
-            EMAIL TEXT
+            EMAIL TEXT,
             NAME TEXT
             
             
         ); 
-
-    '''
-
-    pointer = con.cursor()
-
-
-    try:
-        pointer.execute(sql_query)
-        con.commit()
-        print("Table created")
-        
-    except:
-        print("Table already created")
-
-    finally:
-        con.close()
+        '''
+        cursor.execute(create_workspace)
+        connection.commit()
+        connection.close()
