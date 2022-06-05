@@ -17,7 +17,7 @@ Description:
   
   After paying the user will be greeted with an automatic email with his order
   
-  Further description could be found in : [RequirementsForGreatBuy.pdf](https://github.com/DavidBobek/Great-Buy/files/8750079/RequirementsForGreatBuy.pdf)
+  Further description could be found in :
 
 
         
