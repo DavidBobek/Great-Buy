@@ -22,9 +22,7 @@ def registering(user):
     insert_sql_query = f'''
 
     INSERT INTO UserData(USER_ID,PASSWORD,EMAIL,NAME)VALUES ({_id}, {password}, {email}, {name});
-
-
-
+    
     '''
     
     con.commit()
@@ -34,7 +32,7 @@ def registering(user):
     
     
 
-  
+    con.commit()
     con.close()
     
     

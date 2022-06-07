@@ -41,7 +41,6 @@ class Product:
         self.storage_type = storage_type
         self.color = color
         self.description = description
-        self.reviews = {}
         
 
 

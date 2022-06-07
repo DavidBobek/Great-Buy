@@ -281,6 +281,13 @@ class firstApp(Ui_MainWindow):
         #maybe write something into another database
         
    
+        """
+           body = f'Hi {name}! This is a AllBuy!\nCongratulation with your purchase. You have bought: {out[:-2]}\nThe total price would be {price} {currency}'
+
+            msg = f'Subject: {subject}\n\n{body}'
+
+            server.sendmail('allbuyco2022@gmail.com', f'{email}', msg)
+        """
         try:
             
             
@@ -288,16 +295,52 @@ class firstApp(Ui_MainWindow):
                 server.starttls()
                 try:
                     
+                    products = """"""
+                    for x in newUser.basket.items:
+                        
+                        product= """"""
+                        product += "\n"
+                        product += f'Name: {x.name}'
+                        product += "\n"
+                        product += f'Processor: {x.processor}'
+                        product += "\n"
+                        product += f'Storage Type: {x.storage_type}'
+                        product += "\n"
+                        product += f'Price: {x.price}'
+                        product += "\n"
+                        product += f'Color: {x.color}'
+                        product += "\n"
+                        product += f'Screen size: {x.screensize}'
+                        product += "\n"
+                        product += f'Description: {x.description}'
+                        product += "\n"
+                        product += f'Product Price: {x.price}'
+                        product += "\n"
+                        product += "\n"
+                        
+                        products += product
+                        
+                        
+                        #ll = [f'{name}={value}\n' for name, value in x._dict_.items()]
                     server.login('greatbuyeshop@gmail.com', 'hufgoexbthpcfhew')
                     
-                    server.sendmail('greatbuyeshop@gmail.com',newUser.email,
-                            f'Thank you {newUser.name} for buying the products with a value of {current_basket.calculate_total_value()} euros')
-                    print("payed")   
+                    subject = 'GreatBuy: Your order'
+                    body = f'''Thank you {newUser.name} for buying the products with a value of {current_basket.calculate_total_value()} euros
+                    
+                    The products you have bought are: 
+{products}'''
+                    msg = f'Subject: {subject}\n\n{body}'
+                    
+                    server.sendmail('greatbuyeshop@gmail.com',newUser.email,msg)
+                    print("payed")
+                    self.window.hide()
+                    
         
                 except smtplib.SMTPAuthenticationError as error:
                     print(f'Something is wrong with sender data {error}')     
         except:
             self.openregistration()
+            
         """ def email_verification(name, email, code):
     
 
