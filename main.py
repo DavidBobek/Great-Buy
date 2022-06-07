@@ -281,13 +281,7 @@ class firstApp(Ui_MainWindow):
         #maybe write something into another database
         
    
-        """
-           body = f'Hi {name}! This is a AllBuy!\nCongratulation with your purchase. You have bought: {out[:-2]}\nThe total price would be {price} {currency}'
 
-            msg = f'Subject: {subject}\n\n{body}'
-
-            server.sendmail('allbuyco2022@gmail.com', f'{email}', msg)
-        """
         try:
             
             
