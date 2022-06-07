@@ -334,29 +334,7 @@ class firstApp(Ui_MainWindow):
                     print(f'Something is wrong with sender data {error}')     
         except:
             self.openregistration()
-            
-        """ def email_verification(name, email, code):
-    
 
-    :param name: user_name
-    :param email: user_email
-    :param code: randomly generated to verify email
-    :return: sends email to mentioned email address with the code in order to verify if this email belongs to our user
-   
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
-        server.starttls()
-        try:
-            server.login('allbuyco2022@gmail.com', 'onxvgueeekrealob')
-
-            subject = 'Verify Email Address'
-            body = f'Hi {name}! This is a AllBuy!\n\tThis is a verification message. Your code is: {code}.'
-
-            msg = f'Subject: {subject}\n\n{body}'
-
-            server.sendmail('allbuyco2022@gmail.com', f'{email}', msg)
-        except smtplib.SMTPAuthenticationError as error:
-            print(f'Something is wrong with sender data {error}')"""
-            
             
     def checking(self):
         
