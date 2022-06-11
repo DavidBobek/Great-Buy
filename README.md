@@ -15,7 +15,7 @@ Description:
   
   User has a ability to register/login, filter his products, add them to basket and pay. 
   
-  After paying the user will be greeted with an automatic email with his order
+  After paying the user will be greeted with an automatic email using SMTP protocol with his order
   
   Further description could be found in :
 
