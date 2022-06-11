@@ -326,6 +326,7 @@ class firstApp(Ui_MainWindow):
                     msg = f'Subject: {subject}\n\n{body}'
                     
                     server.sendmail('greatbuyeshop@gmail.com',newUser.email,msg)
+                    
                     print("payed")
                     self.window.hide()
                     
