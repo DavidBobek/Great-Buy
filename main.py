@@ -9,6 +9,10 @@ import sys
 from db_creating import *
 
 
+#pip install pyqt5
+#pip install psycopg2
+
+
 # validation of the inputs from registration
 def validation(name, email_address, password):
     correctness = 1
